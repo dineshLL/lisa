@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home | Cody</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet"> 
+    <link href="css/lightbox.css" rel="stylesheet"> 
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+
+    
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+    <!--Blocky Libraries-->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="blockly/blockly_compressed.js"></script>
+    <script src="blockly/blocks_compressed.js"></script>
+    <script src="blockly/msg/js/en.js"></script>
+    <script src="blocks/string_length.block.js"></script>
+    <!--Blocky Libraries-->
+</head>
+
+<body>
+	<header id="header">      
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                           <br>
+                        </ul>
+                    </div> 
+                </div>
+             </div>
+        </div>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="index.html">
+                    	<h1><img src="images/logo.png" alt="logo"></h1>
+                    </a>
+                    
+                </div>
+          
+            </div>
+        </div>
+    </header>
+    <!--/header-->
+
+    <!--home-slider-->
+    <section id="home-slider">
+        <div class="container">
+            <div class="row">
+                <div class="main-slider">
+                    <div class="slide-text">
+                        <h1>We Are Creative Nerds</h1>
+                        <p>Boudin doner frankfurter pig. Cow shank bresaola pork loin tri-tip tongue venison pork belly meatloaf short loin landjaeger biltong beef ribs shankle chicken andouille.</p>
+                        <a  id="playground" class="btn btn-common">PLAYGROUD</a>
+                    </div>
+                    <img src="images/home/slider/hill.png" class="slider-hill" alt="slider image">
+                    <img src="images/home/slider/house.png" class="slider-house" alt="slider image">
+                    <img src="images/home/slider/sun.png" class="slider-sun" alt="slider image">
+                    <img src="images/home/slider/birds1.png" class="slider-birds1" alt="slider image">
+                    <img src="images/home/slider/birds2.png" class="slider-birds2" alt="slider image">
+                </div>
+            </div>
+        </div>
+        <div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>
+    </section>
+    <!--/home-slider-->
+
+    <!--content -->
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row" >
+                    <div class="action">
+                        <div class="col-sm-12" id="scrollingPosition">
+                            <h1 class="title">OOP CONCEPTS</h1>
+                            <p>Be Creative</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+
+  <div id="blocklyDiv" style="height: 480px; width: 1200px;margin:5%;position:center"></div>
+
+  <xml id="toolbox" style="display: none">
+    <category name="Control">
+        <block type="block_type"></block>
+        <block type="class_container"></block>
+        <block type="number_input"></block>
+        <block type="controls_whileUntil"></block>
+        <block type="string_length"></block>
+    </category>
+    <category name="This also can be" colour="210">
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_boolean"></block>
+    </category>
+</xml>
+
+  <script>
+    var workspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         toolbox: document.getElementById('toolbox')});
+  </script>
+
+   <section id="blog-details" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-7">
+                    <div class="row">
+                         <div class="col-md-12 col-sm-12">
+                            <div class="single-blog blog-details two-column">
+                                <div class="post-thumb">
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="#">Class</a></h2>
+                                    <h3 class="post-author"><a href="#"> Details</a></h3>
+                                    <p>A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.
+                                    Below is an example of a basic Java class definition: <br> <br>
+
+                                   class Sample<br>
+                                    {<br>
+                                        <span style="padding-left:5em">public static void main(String[] args)</span><br>
+                                        <span style="padding-left:5em">{</spanp><br>
+                                        <span style="padding-left:10em">String sampleText = "Hello world!";</span><br>
+                                        <span style="padding-left:10em">System.out.println(sampleText);</span><br>
+                                        <span style="padding-left:5em">}</span><br>
+                                    } </p>
+
+                                    <p>
+                                        The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java's built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.
+
+                                        Classes are a fundamental part of object-oriented programming. They allow variables and methods to be isolated to specific objects instead of being accessible by all parts of the program. This encapsulation of data protects each class from changes in other parts of the program. By using classes, developers can create structured programs with source code that can be easily modified.
+
+                                        NOTE: While classes are foundational in object-oriented programming, they serve as blueprints, rather than the building blocks of each program. This is because classes must be instantiated as objects in order to be used within a program. Constructors are typically used to create objects from classes, while destructors are used to free up resources used by objects that are no longer needed.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">
+                        <div class="sidebar-item  recent">
+                            <h3>Other Featuers</h3>
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="#"><img src="images/portfolio/project1.jpg" alt=""></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">Inheritance</a></h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="#"><img src="images/portfolio/project2.jpg" alt=""></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">Polymorphism</a></h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="#"><img src="images/portfolio/project3.jpg" alt=""></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">Abstraction</a></h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/content -->
+    
+    <!--footer-->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center bottom-separator">
+                    <img src="images/home/under.png" class="img-responsive inline" alt="">
+                </div>
+                <div class="col-md-5 col-sm-6" style="padding-left:10%">
+                    <div class="testimonial bottom">
+                        <h2>Testimonial</h2>
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#"><img src="images/home/profile1.png" hidden alt=""></a>
+                            </div>
+                            <div class="media-body">
+                                <blockquote>Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore tail.</blockquote>
+                                <h3><a href="#">- Jhon Kalis</a></h3>
+                            </div>
+                         </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#"><img src="images/home/profile2.png" hidden alt=""></a>
+                            </div>
+                            <div class="media-body">
+                                <blockquote>Capicola nisi flank sed minim sunt aliqua rump pancetta leberkas venison eiusmod.</blockquote>
+                                <h3><a href="">- Abraham Josef</a></h3>
+                            </div>
+                        </div>   
+                    </div> 
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <div class="contact-info bottom">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="contact-form bottom">
+                        <h2>Send a message</h2>
+                        <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
+                            </div>                        
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+                        <p>&copy; Your Company 2016. All Rights Reserved.</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/footer-->
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>   
+    <script type="text/javascript" src="js/scrolling.js" ></script>
+
+</body>
+</html>
