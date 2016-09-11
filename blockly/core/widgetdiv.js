@@ -3,7 +3,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2013 Google Inc.
- * https://developers.google.com/blockly/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,59 +30,38 @@ goog.provide('Blockly.WidgetDiv');
 
 goog.require('Blockly.Css');
 goog.require('goog.dom');
-goog.require('goog.dom.TagName');
-goog.require('goog.style');
 
 
 /**
- * The HTML container.  Set once by Blockly.WidgetDiv.createDom.
- * @type {Element}
+ * The HTML container.  Set once by inject.js's Blockly.createDom_.
+ * @type Element
  */
 Blockly.WidgetDiv.DIV = null;
 
 /**
  * The object currently using this container.
- * @type {Object}
  * @private
+ * @type Object
  */
 Blockly.WidgetDiv.owner_ = null;
 
 /**
  * Optional cleanup function set by whichever object uses the widget.
- * @type {Function}
  * @private
+ * @type Function
  */
 Blockly.WidgetDiv.dispose_ = null;
 
 /**
- * Create the widget div and inject it onto the page.
- */
-Blockly.WidgetDiv.createDom = function() {
-  if (Blockly.WidgetDiv.DIV) {
-    return;  // Already created.
-  }
-  // Create an HTML container for popup overlays (e.g. editor widgets).
-  Blockly.WidgetDiv.DIV =
-      goog.dom.createDom(goog.dom.TagName.DIV, 'blocklyWidgetDiv');
-  document.body.appendChild(Blockly.WidgetDiv.DIV);
-};
-
-/**
  * Initialize and display the widget div.  Close the old one if needed.
  * @param {!Object} newOwner The object that will be using this container.
- * @param {boolean} rtl Right-to-left (true) or left-to-right (false).
  * @param {Function} dispose Optional cleanup function to be run when the widget
  *   is closed.
  */
-Blockly.WidgetDiv.show = function(newOwner, rtl, dispose) {
+Blockly.WidgetDiv.show = function(newOwner, dispose) {
   Blockly.WidgetDiv.hide();
   Blockly.WidgetDiv.owner_ = newOwner;
   Blockly.WidgetDiv.dispose_ = dispose;
-  // Temporarily move the widget to the top of the screen so that it does not
-  // cause a scrollbar jump in Firefox when displayed.
-  var xy = goog.style.getViewportPageOffset(document);
-  Blockly.WidgetDiv.DIV.style.top = xy.y + 'px';
-  Blockly.WidgetDiv.DIV.style.direction = rtl ? 'rtl' : 'ltr';
   Blockly.WidgetDiv.DIV.style.display = 'block';
 };
 
@@ -91,11 +70,9 @@ Blockly.WidgetDiv.show = function(newOwner, rtl, dispose) {
  */
 Blockly.WidgetDiv.hide = function() {
   if (Blockly.WidgetDiv.owner_) {
-    Blockly.WidgetDiv.owner_ = null;
     Blockly.WidgetDiv.DIV.style.display = 'none';
-    Blockly.WidgetDiv.DIV.style.left = '';
-    Blockly.WidgetDiv.DIV.style.top = '';
     Blockly.WidgetDiv.dispose_ && Blockly.WidgetDiv.dispose_();
+    Blockly.WidgetDiv.owner_ = null;
     Blockly.WidgetDiv.dispose_ = null;
     goog.dom.removeChildren(Blockly.WidgetDiv.DIV);
   }
@@ -127,16 +104,15 @@ Blockly.WidgetDiv.hideIfOwner = function(oldOwner) {
  * @param {number} anchorY Vertical location (window coorditates, not body).
  * @param {!goog.math.Size} windowSize Height/width of window.
  * @param {!goog.math.Coordinate} scrollOffset X/y of window scrollbars.
- * @param {boolean} rtl True if RTL, false if LTR.
  */
 Blockly.WidgetDiv.position = function(anchorX, anchorY, windowSize,
-                                      scrollOffset, rtl) {
+                                      scrollOffset) {
   // Don't let the widget go above the top edge of the window.
   if (anchorY < scrollOffset.y) {
     anchorY = scrollOffset.y;
   }
-  if (rtl) {
-    // Don't let the widget go right of the right edge of the window.
+  if (Blockly.RTL) {
+    // Don't let the menu go right of the right edge of the window.
     if (anchorX > windowSize.width + scrollOffset.x) {
       anchorX = windowSize.width + scrollOffset.x;
     }
@@ -148,5 +124,4 @@ Blockly.WidgetDiv.position = function(anchorX, anchorY, windowSize,
   }
   Blockly.WidgetDiv.DIV.style.left = anchorX + 'px';
   Blockly.WidgetDiv.DIV.style.top = anchorY + 'px';
-  Blockly.WidgetDiv.DIV.style.height = windowSize.height + 'px';
 };

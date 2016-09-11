@@ -3,7 +3,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,41 +38,10 @@ goog.require('Blockly.Icon');
  */
 Blockly.Warning = function(block) {
   Blockly.Warning.superClass_.constructor.call(this, block);
-  this.createIcon();
-  // The text_ object can contain multiple warnings.
-  this.text_ = {};
+  this.createIcon_();
 };
 goog.inherits(Blockly.Warning, Blockly.Icon);
 
-/**
- * Does this icon get hidden when the block is collapsed.
- */
-Blockly.Warning.prototype.collapseHidden = false;
-
-/**
- * Draw the warning icon.
- * @param {!Element} group The icon group.
- * @private
- */
-Blockly.Warning.prototype.drawIcon_ = function(group) {
-  // Triangle with rounded corners.
-  Blockly.createSvgElement('path',
-      {'class': 'blocklyIconShape',
-       'd': 'M2,15Q-1,15 0.5,12L6.5,1.7Q8,-1 9.5,1.7L15.5,12Q17,15 14,15z'},
-       group);
-  // Can't use a real '!' text character since different browsers and operating
-  // systems render it differently.
-  // Body of exclamation point.
-  Blockly.createSvgElement('path',
-      {'class': 'blocklyIconSymbol',
-       'd': 'm7,4.8v3.16l0.27,2.27h1.46l0.27,-2.27v-3.16z'},
-       group);
-  // Dot of exclamation point.
-  Blockly.createSvgElement('rect',
-      {'class': 'blocklyIconSymbol',
-       'x': '7', 'y': '11', 'height': '2', 'width': '2'},
-       group);
-};
 
 /**
  * Create the text for the warning's bubble.
@@ -97,6 +66,34 @@ Blockly.Warning.textToDom_ = function(text) {
 };
 
 /**
+ * Warning text (if bubble is not visible).
+ * @private
+ */
+Blockly.Warning.prototype.text_ = '';
+
+/**
+ * Create the icon on the block.
+ * @private
+ */
+Blockly.Warning.prototype.createIcon_ = function() {
+  Blockly.Icon.prototype.createIcon_.call(this);
+  /* Here's the markup that will be generated:
+  <path class="blocklyIconShield" d="..."/>
+  <text class="blocklyIconMark" x="8" y="13">!</text>
+  */
+  var iconShield = Blockly.createSvgElement('path',
+      {'class': 'blocklyIconShield',
+       'd': 'M 2,15 Q -1,15 0.5,12 L 6.5,1.7 Q 8,-1 9.5,1.7 L 15.5,12 ' +
+       'Q 17,15 14,15 z'},
+      this.iconGroup_);
+  this.iconMark_ = Blockly.createSvgElement('text',
+      {'class': 'blocklyIconMark',
+       'x': Blockly.Icon.RADIUS,
+       'y': 2 * Blockly.Icon.RADIUS - 3}, this.iconGroup_);
+  this.iconMark_.appendChild(document.createTextNode('!'));
+};
+
+/**
  * Show or hide the warning bubble.
  * @param {boolean} visible True if the bubble should be visible.
  */
@@ -105,19 +102,18 @@ Blockly.Warning.prototype.setVisible = function(visible) {
     // No change.
     return;
   }
-  Blockly.Events.fire(
-      new Blockly.Events.Ui(this.block_, 'warningOpen', !visible, visible));
   if (visible) {
-    // Create the bubble to display all warnings.
-    var paragraph = Blockly.Warning.textToDom_(this.getText());
+    // Create the bubble.
+    var paragraph = Blockly.Warning.textToDom_(this.text_);
     this.bubble_ = new Blockly.Bubble(
-        /** @type {!Blockly.WorkspaceSvg} */ (this.block_.workspace),
-        paragraph, this.block_.svgPath_, this.iconXY_, null, null);
-    if (this.block_.RTL) {
+        /** @type {!Blockly.Workspace} */ (this.block_.workspace),
+        paragraph, this.block_.svg_.svgPath_,
+        this.iconX_, this.iconY_, null, null);
+    if (Blockly.RTL) {
       // Right-align the paragraph.
       // This cannot be done until the bubble is rendered on screen.
       var maxWidth = paragraph.getBBox().width;
-      for (var i = 0, textElement; textElement = paragraph.childNodes[i]; i++) {
+      for (var x = 0, textElement; textElement = paragraph.childNodes[x]; x++) {
         textElement.setAttribute('text-anchor', 'end');
         textElement.setAttribute('x', maxWidth + Blockly.Bubble.BORDER_WIDTH);
       }
@@ -145,35 +141,17 @@ Blockly.Warning.prototype.bodyFocus_ = function(e) {
 
 /**
  * Set this warning's text.
- * @param {string} text Warning text (or '' to delete).
- * @param {string} id An ID for this text entry to be able to maintain
- *     multiple warnings.
+ * @param {string} text Warning text.
  */
-Blockly.Warning.prototype.setText = function(text, id) {
-  if (this.text_[id] == text) {
+Blockly.Warning.prototype.setText = function(text) {
+  if (this.text_ == text) {
     return;
   }
-  if (text) {
-    this.text_[id] = text;
-  } else {
-    delete this.text_[id];
-  }
+  this.text_ = text;
   if (this.isVisible()) {
     this.setVisible(false);
     this.setVisible(true);
   }
-};
-
-/**
- * Get this warning's texts.
- * @return {string} All texts concatenated into one string.
- */
-Blockly.Warning.prototype.getText = function() {
-  var allWarnings = [];
-  for (var id in this.text_) {
-    allWarnings.push(this.text_[id]);
-  }
-  return allWarnings.join('\n');
 };
 
 /**

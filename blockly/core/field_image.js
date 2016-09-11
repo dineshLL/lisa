@@ -3,7 +3,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,6 @@
 goog.provide('Blockly.FieldImage');
 
 goog.require('Blockly.Field');
-goog.require('goog.dom');
-goog.require('goog.math.Size');
 goog.require('goog.userAgent');
 
 
@@ -37,7 +35,7 @@ goog.require('goog.userAgent');
  * @param {string} src The URL of the image.
  * @param {number} width Width of the image.
  * @param {number} height Height of the image.
- * @param {string=} opt_alt Optional alt text for when block is collapsed.
+ * @param {?string} opt_alt Optional alt text for when block is collapsed.
  * @extends {Blockly.Field}
  * @constructor
  */
@@ -46,12 +44,37 @@ Blockly.FieldImage = function(src, width, height, opt_alt) {
   // Ensure height and width are numbers.  Strings are bad at math.
   this.height_ = Number(height);
   this.width_ = Number(width);
-  this.size_ = new goog.math.Size(this.width_,
-      this.height_ + 2 * Blockly.BlockSvg.INLINE_PADDING_Y);
+  this.size_ = {height: this.height_ + 10, width: this.width_};
   this.text_ = opt_alt || '';
+  // Build the DOM.
+  var offsetY = 6 - Blockly.BlockSvg.FIELD_HEIGHT;
+  this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
+  this.imageElement_ = Blockly.createSvgElement('image',
+      {'height': this.height_ + 'px',
+       'width': this.width_ + 'px',
+       'y': offsetY}, this.fieldGroup_);
   this.setValue(src);
+  if (goog.userAgent.GECKO) {
+    // Due to a Firefox bug which eats mouse events on image elements,
+    // a transparent rectangle needs to be placed on top of the image.
+    this.rectElement_ = Blockly.createSvgElement('rect',
+        {'height': this.height_ + 'px',
+         'width': this.width_ + 'px',
+         'y': offsetY,
+         'fill-opacity': 0}, this.fieldGroup_);
+  }
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
+
+/**
+ * Clone this FieldImage.
+ * @return {!Blockly.FieldImage} The result of calling the constructor again
+ *   with the current values of the arguments used during construction.
+ */
+Blockly.FieldImage.prototype.clone = function() {
+  return new Blockly.FieldImage(this.getSrc(), this.width_, this.height_,
+      this.getText());
+};
 
 /**
  * Rectangular mask used by Firefox.
@@ -66,36 +89,15 @@ Blockly.FieldImage.prototype.rectElement_ = null;
 Blockly.FieldImage.prototype.EDITABLE = false;
 
 /**
- * Install this image on a block.
+ * Install this text on a block.
+ * @param {!Blockly.Block} block The block containing this text.
  */
-Blockly.FieldImage.prototype.init = function() {
-  if (this.fieldGroup_) {
-    // Image has already been initialized once.
-    return;
+Blockly.FieldImage.prototype.init = function(block) {
+  if (this.sourceBlock_) {
+    throw 'Image has already been initialized once.';
   }
-  // Build the DOM.
-  /** @type {SVGElement} */
-  this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
-  if (!this.visible_) {
-    this.fieldGroup_.style.display = 'none';
-  }
-  /** @type {SVGElement} */
-  this.imageElement_ = Blockly.createSvgElement('image',
-      {'height': this.height_ + 'px',
-       'width': this.width_ + 'px'}, this.fieldGroup_);
-  this.setValue(this.src_);
-  if (goog.userAgent.GECKO) {
-    /**
-     * Due to a Firefox bug which eats mouse events on image elements,
-     * a transparent rectangle needs to be placed on top of the image.
-     * @type {SVGElement}
-     */
-    this.rectElement_ = Blockly.createSvgElement('rect',
-        {'height': this.height_ + 'px',
-         'width': this.width_ + 'px',
-         'fill-opacity': 0}, this.fieldGroup_);
-  }
-  this.sourceBlock_.getSvgRoot().appendChild(this.fieldGroup_);
+  this.sourceBlock_ = block;
+  block.getSvgRoot().appendChild(this.fieldGroup_);
 
   // Configure the field to be transparent with respect to tooltips.
   var topElement = this.rectElement_ || this.imageElement_;
@@ -143,10 +145,8 @@ Blockly.FieldImage.prototype.setValue = function(src) {
     return;
   }
   this.src_ = src;
-  if (this.imageElement_) {
-    this.imageElement_.setAttributeNS('http://www.w3.org/1999/xlink',
-        'xlink:href', goog.isString(src) ? src : '');
-  }
+  this.imageElement_.setAttributeNS('http://www.w3.org/1999/xlink',
+      'xlink:href', goog.isString(src) ? src : '');
 };
 
 /**
@@ -160,12 +160,4 @@ Blockly.FieldImage.prototype.setText = function(alt) {
     return;
   }
   this.text_ = alt;
-};
-
-/**
- * Images are fixed width, no need to render.
- * @private
- */
-Blockly.FieldImage.prototype.render_ = function() {
-  // NOP
 };

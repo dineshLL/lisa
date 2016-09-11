@@ -2,90 +2,55 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Blockly Generator Tests</title>
-<script src="../../blockly_uncompressed.js"></script>
-
-<script src="../../generators/javascript.js"></script>
-<script src="unittest_javascript.js"></script>
-<script src="../../generators/javascript/logic.js"></script>
-<script src="../../generators/javascript/loops.js"></script>
-<script src="../../generators/javascript/math.js"></script>
-<script src="../../generators/javascript/text.js"></script>
-<script src="../../generators/javascript/lists.js"></script>
-<script src="../../generators/javascript/colour.js"></script>
-<script src="../../generators/javascript/variables.js"></script>
-<script src="../../generators/javascript/procedures.js"></script>
-
-<script src="../../generators/python.js"></script>
-<script src="unittest_python.js"></script>
-<script src="../../generators/python/logic.js"></script>
-<script src="../../generators/python/loops.js"></script>
-<script src="../../generators/python/math.js"></script>
-<script src="../../generators/python/text.js"></script>
-<script src="../../generators/python/lists.js"></script>
-<script src="../../generators/python/colour.js"></script>
-<script src="../../generators/python/variables.js"></script>
-<script src="../../generators/python/procedures.js"></script>
-
-<script src="../../generators/php.js"></script>
-<script src="unittest_php.js"></script>
-<script src="../../generators/php/logic.js"></script>
-<script src="../../generators/php/loops.js"></script>
-<script src="../../generators/php/math.js"></script>
-<script src="../../generators/php/text.js"></script>
-<script src="../../generators/php/lists.js"></script>
-<script src="../../generators/php/colour.js"></script>
-<script src="../../generators/php/variables.js"></script>
-<script src="../../generators/php/procedures.js"></script>
-
-<script src="../../generators/lua.js"></script>
-<script src="unittest_lua.js"></script>
-<script src="../../generators/lua/logic.js"></script>
-<script src="../../generators/lua/loops.js"></script>
-<script src="../../generators/lua/math.js"></script>
-<script src="../../generators/lua/text.js"></script>
-<script src="../../generators/lua/lists.js"></script>
-<script src="../../generators/lua/colour.js"></script>
-<script src="../../generators/lua/variables.js"></script>
-<script src="../../generators/lua/procedures.js"></script>
-
-<script src="../../generators/dart.js"></script>
-<script src="unittest_dart.js"></script>
-<script src="../../generators/dart/logic.js"></script>
-<script src="../../generators/dart/loops.js"></script>
-<script src="../../generators/dart/math.js"></script>
-<script src="../../generators/dart/text.js"></script>
-<script src="../../generators/dart/lists.js"></script>
-<script src="../../generators/dart/colour.js"></script>
-<script src="../../generators/dart/variables.js"></script>
-<script src="../../generators/dart/procedures.js"></script>
-
-<script src="unittest.js"></script>
-<script src="../../msg/messages.js"></script>
-<script src="../../blocks/logic.js"></script>
-<script src="../../blocks/loops.js"></script>
-<script src="../../blocks/math.js"></script>
-<script src="../../blocks/text.js"></script>
-<script src="../../blocks/lists.js"></script>
-<script src="../../blocks/colour.js"></script>
-<script src="../../blocks/variables.js"></script>
-<script src="../../blocks/procedures.js"></script>
-<script>
+<title>Blockly Generator Test</title>
+<script type="text/javascript" src="../../blockly_uncompressed.js"></script>
+<script type="text/javascript" src="../../generators/javascript.js"></script>
+<script type="text/javascript" src="unittest_javascript.js"></script>
+<script type="text/javascript" src="../../generators/javascript/logic.js"></script>
+<script type="text/javascript" src="../../generators/javascript/loops.js"></script>
+<script type="text/javascript" src="../../generators/javascript/math.js"></script>
+<script type="text/javascript" src="../../generators/javascript/text.js"></script>
+<script type="text/javascript" src="../../generators/javascript/lists.js"></script>
+<script type="text/javascript" src="../../generators/javascript/colour.js"></script>
+<script type="text/javascript" src="../../generators/javascript/variables.js"></script>
+<script type="text/javascript" src="../../generators/javascript/procedures.js"></script>
+<script type="text/javascript" src="../../generators/python.js"></script>
+<script type="text/javascript" src="unittest_python.js"></script>
+<script type="text/javascript" src="../../generators/python/logic.js"></script>
+<script type="text/javascript" src="../../generators/python/loops.js"></script>
+<script type="text/javascript" src="../../generators/python/math.js"></script>
+<script type="text/javascript" src="../../generators/python/text.js"></script>
+<script type="text/javascript" src="../../generators/python/lists.js"></script>
+<script type="text/javascript" src="../../generators/python/colour.js"></script>
+<script type="text/javascript" src="../../generators/python/variables.js"></script>
+<script type="text/javascript" src="../../generators/python/procedures.js"></script>
+<script type="text/javascript" src="../../generators/dart.js"></script>
+<script type="text/javascript" src="unittest_dart.js"></script>
+<script type="text/javascript" src="../../generators/dart/logic.js"></script>
+<script type="text/javascript" src="../../generators/dart/loops.js"></script>
+<script type="text/javascript" src="../../generators/dart/math.js"></script>
+<script type="text/javascript" src="../../generators/dart/text.js"></script>
+<script type="text/javascript" src="../../generators/dart/lists.js"></script>
+<script type="text/javascript" src="../../generators/dart/colour.js"></script>
+<script type="text/javascript" src="../../generators/dart/variables.js"></script>
+<script type="text/javascript" src="../../generators/dart/procedures.js"></script>
+<script type="text/javascript" src="unittest.js"></script>
+<script type="text/javascript" src="../../msg/messages.js"></script>
+<script type="text/javascript" src="../../blocks/logic.js"></script>
+<script type="text/javascript" src="../../blocks/loops.js"></script>
+<script type="text/javascript" src="../../blocks/math.js"></script>
+<script type="text/javascript" src="../../blocks/text.js"></script>
+<script type="text/javascript" src="../../blocks/lists.js"></script>
+<script type="text/javascript" src="../../blocks/colour.js"></script>
+<script type="text/javascript" src="../../blocks/variables.js"></script>
+<script type="text/javascript" src="../../blocks/procedures.js"></script>
+<script type="text/javascript">
 'use strict';
 
-var workspace = null;
-
 function start() {
-  workspace = Blockly.inject('blocklyDiv',
-      {grid:
-         {spacing: 25,
-          length: 3,
-          colour: '#ccc',
-          snap: true},
-       media: '../../media/',
-       toolbox: document.getElementById('toolbox'),
-       zoom: {controls: true, wheel: true}
-       });
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('svg'),
+                 {path: '../../', toolbox: toolbox});
 }
 
 function loadXml() {
@@ -126,16 +91,14 @@ function fetchFile(xmlUrl) {
 function fromXml(xmlText) {
   var output = document.getElementById('importExport');
   output.value = xmlText;
-  output.scrollTop = 0;
-  output.scrollLeft = 0;
-  workspace.clear();
+  Blockly.mainWorkspace.clear();
   try {
     var xmlDoc = Blockly.Xml.textToDom(xmlText);
   } catch (e) {
     alert('Error parsing XML:\n' + e);
     return;
   }
-  Blockly.Xml.domToWorkspace(xmlDoc, workspace);
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDoc);
 }
 
 function setOutput(text) {
@@ -146,43 +109,24 @@ function setOutput(text) {
 }
 
 function toXml() {
-  var xmlDom = Blockly.Xml.workspaceToDom(workspace);
+  var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-  xmlText = xmlText.replace(/ id="\d+"/g, '');
   setOutput(xmlText);
 }
 
 function toJavaScript() {
-  var oneBasedIndexing = document.getElementById('indexing').checked;
-  Blockly.JavaScript.ONE_BASED_INDEXING = oneBasedIndexing;
   var code = '\'use strict\';\n\n'
-  code += Blockly.JavaScript.workspaceToCode(workspace);
+  code += Blockly.JavaScript.workspaceToCode();
   setOutput(code);
 }
 
 function toPython() {
-  var oneBasedIndexing = document.getElementById('indexing').checked;
-  Blockly.Python.ONE_BASED_INDEXING = oneBasedIndexing;
-  var code = Blockly.Python.workspaceToCode(workspace);
-  setOutput(code);
-}
-
-function toPhp() {
-  var oneBasedIndexing = document.getElementById('indexing').checked;
-  Blockly.PHP.ONE_BASED_INDEXING = oneBasedIndexing;
-  var code = Blockly.PHP.workspaceToCode(workspace);
-  setOutput(code);
-}
-
-function toLua() {
-  var code = Blockly.Lua.workspaceToCode(workspace);
+  var code = Blockly.Python.workspaceToCode();
   setOutput(code);
 }
 
 function toDart() {
-  var oneBasedIndexing = document.getElementById('indexing').checked;
-  Blockly.Dart.ONE_BASED_INDEXING = oneBasedIndexing;
-  var code = Blockly.Dart.workspaceToCode(workspace);
+  var code = Blockly.Dart.workspaceToCode();
   setOutput(code);
 }
 </script>
@@ -201,11 +145,14 @@ h1 {
   font-weight: normal;
   font-size: 140%;
 }
-#blocklyDiv {
+#svg {
   float: right;
   height: 95%;
   width: 69%;
   margin-top: 5px;
+}
+.blocklySvg {
+  border: 1px solid #000;
 }
 #importExport {
   height: 100%;
@@ -215,29 +162,16 @@ h1 {
 </head>
 <body onload="start()">
 
-  <div id="blocklyDiv"></div>
+  <div id="svg"></div>
 
   <xml id="toolbox" style="display: none">
-    <category name="Unit test" colour="65">
+    <category name="Unit test">
       <block type="unittest_main"></block>
-      <block type="unittest_assertequals">
-        <value name="MESSAGE">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>
-      <block type="unittest_assertvalue">
-        <value name="MESSAGE">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>
+      <block type="unittest_assertequals"></block>
+      <block type="unittest_assertvalue"></block>
       <block type="unittest_fail"></block>
-      <block type="unittest_adjustindex"></block>
     </category>
-    <category name="Logic" colour="210">
+    <category name="Logic">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -246,67 +180,171 @@ h1 {
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="Loops" colour="120">
-      <block type="controls_repeat_ext"></block>
+    <category name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
       <block type="controls_whileUntil"></block>
-      <block type="controls_for"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+        <value name="BY">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="Math" colour="230">
+    <category name="Math">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
       <block type="math_trig"></block>
       <block type="math_constant"></block>
       <block type="math_number_property"></block>
+      <block type="math_change">
+        <value name="DELTA">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
       <block type="math_round"></block>
       <block type="math_on_list"></block>
       <block type="math_modulo"></block>
-      <block type="math_constrain"></block>
-      <block type="math_random_int"></block>
+      <block type="math_constrain">
+        <value name="LOW">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="HIGH">
+          <block type="math_number">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+      </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+      </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="Text" colour="160">
+    <category name="Text">
       <block type="text"></block>
       <block type="text_join"></block>
-      <block type="text_append"></block>
+      <block type="text_append">
+        <value name="TEXT">
+          <block type="text"></block>
+        </value>
+      </block>
       <block type="text_length"></block>
       <block type="text_isEmpty"></block>
-      <block type="text_indexOf"></block>
-      <block type="text_charAt"></block>
-      <block type="text_getSubstring"></block>
+      <block type="text_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">text</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_charAt">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">text</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_getSubstring">
+        <value name="STRING">
+          <block type="variables_get">
+            <field name="VAR">text</field>
+          </block>
+        </value>
+      </block>
       <block type="text_changeCase"></block>
       <block type="text_trim"></block>
       <block type="text_print"></block>
-      <block type="text_prompt_ext"></block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <block type="text"></block>
+        </value>
+      </block>
     </category>
-    <category name="Lists" colour="260">
+    <category name="Lists">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
-      <block type="lists_repeat"></block>
+      <block type="lists_repeat">
+        <value name="NUM">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
       <block type="lists_length"></block>
       <block type="lists_isEmpty"></block>
-      <block type="lists_indexOf"></block>
-      <block type="lists_getIndex"></block>
-      <block type="lists_setIndex"></block>
-      <block type="lists_getSublist"></block>
-      <block type="lists_sort"></block>
-      <block type="lists_split"></block>
+      <block type="lists_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getIndex">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getSublist">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
     </category>
-    <category name="Colour" colour="20">
+    <category name="Colour">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <sep></sep>
-    <category name="Variables" colour="330" custom="VARIABLE"></category>
-    <category name="Functions" colour="290" custom="PROCEDURE"></category>
+    <category name="Variables" custom="VARIABLE"></category>
+    <category name="Functions" custom="PROCEDURE"></category>
   </xml>
 
   <table height="95%" width="30%"><tr><td valign="top">
-    <h1>Blockly Generator Tests</h1>
+    <h1>Blockly Generator Test</h1>
 
     <p>
       <select id="testUrl">
@@ -319,14 +357,10 @@ h1 {
         <option value="lists.xml">Lists</option>
         <option value="colour.xml">Colour</option>
         <option value="variables.xml">Variables</option>
-        <option value="functions.xml">Functions</option>
+        <option value="procedures.xml">Procedures</option>
         <option value="">Other...</option>
       </select>
       <input type="button" value="Load" onclick="loadXml()">
-    </p>
-
-    <p>
-      <input id="indexing" type="checkbox" checked> Generate with one-based indexing
     </p>
 
     <p>
@@ -334,8 +368,6 @@ h1 {
       <input type="button" value="XML" onclick="toXml()">
       <input type="button" value="JavaScript" onclick="toJavaScript()">
       <input type="button" value="Python" onclick="toPython()">
-      <input type="button" value="PHP" onclick="toPhp()">
-      <input type="button" value="Lua" onclick="toLua()">
       <input type="button" value="Dart" onclick="toDart()">
     </p>
   </td></tr><tr><td height="99%">
