@@ -7,11 +7,19 @@ goog.provide('Blockly.lisa.containers');
 
 goog.require('Blockly.lisa');
 
+// Blockly.lisa['class-container'] = function(block) {
+//     var text_classname = block.getFieldValue('className');
+//     var branch = Blockly.lisa.statementToCode(block, 'contents');
+//     // TODO: Assemble JavaScript into code variable.
+//     var code = 'class '+ text_classname +' {\n '+ branch +'\n}\n';
+//     return code;
+// };
+
 Blockly.lisa['class-container'] = function(block) {
-    var text_classname = block.getFieldValue('className');
-    var branch = Blockly.lisa.statementToCode(block, 'contents');
+    var text_class_name = block.getFieldValue('class_name');
+    var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
     // TODO: Assemble JavaScript into code variable.
-    var code = 'class '+ text_classname +' {\n '+ branch +'\n}\n';
+    var code = 'class '+ text_class_name +' {\n '+ statements_class_body +'\n}\n';
     return code;
 };
 

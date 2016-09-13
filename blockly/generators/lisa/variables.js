@@ -15,3 +15,22 @@ Blockly.lisa['variable'] = function(block) {
     var code = '\t' + dropdown_variabletype + ' ' +text_varname + ' = 0;\n';
     return code;
 };
+
+/**
+ * parameter block
+ *
+ * @param block
+ * @returns {string}
+ */
+Blockly.lisa['parameter'] = function(block) {
+    var text_parameter = block.getFieldValue('parameter');
+    var dropdown_data_types = block.getFieldValue('data_types');
+    var text_initial_value = block.getFieldValue('initial_value');
+    // TODO: Assemble JavaScript into code variable.
+    if(text_initial_value != null || text_initial_value != '' || text_initial_value != ' '){
+        var code = dropdown_data_types+' '+text_parameter+' = '+text_initial_value;
+    }else {
+        var code = dropdown_data_types+' '+text_parameter;
+    }
+    return code;
+};

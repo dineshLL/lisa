@@ -7,16 +7,34 @@ goog.provide('Blockly.Blocks.test');
 
 goog.require('Blockly.Blocks');
 
+// Blockly.Blocks['class-container'] = {
+//     init: function() {
+//         this.appendDummyInput()
+//             .appendField('class')
+//             .appendField(new Blockly.FieldTextInput('Parent'), 'className');
+//         this.appendStatementInput('contents')
+//             .setCheck(['variable-container', 'method-container', 'class-container'])
+//             .setAlign(Blockly.ALIGN_CENTRE);
+//         this.setColour(230);
+//         this.setTooltip('This is a class container');
+//         this.setHelpUrl('http://www.example.com/');
+//     }
+// };
+
 Blockly.Blocks['class-container'] = {
     init: function() {
         this.appendDummyInput()
-            .appendField('class')
-            .appendField(new Blockly.FieldTextInput('Parent'), 'className');
-        this.appendStatementInput('contents')
-            .setCheck(['variable-container', 'method-container', 'class-container'])
+            .setAlign(Blockly.ALIGN_CENTRE)
+            .appendField("class")
+            .appendField(new Blockly.FieldTextInput("sampleClass"), "class_name");
+        this.appendStatementInput("class_body")
+            .setCheck(["variable-container", "method-container", "class-container"])
             .setAlign(Blockly.ALIGN_CENTRE);
-        this.setColour(230);
-        this.setTooltip('This is a class container');
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_CENTRE);
+        this.setInputsInline(true);
+        this.setColour(240);
+        this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
 };
@@ -24,7 +42,7 @@ Blockly.Blocks['class-container'] = {
 Blockly.Blocks['variable-container'] = {
     init: function() {
         this.appendStatementInput('variables')
-            .setCheck(['variable'])
+            .setCheck(null)
             .appendField(new Blockly.FieldDropdown([['private', 'private'], ['public', 'public'], ['protected', 'protected'], ['default', 'default']]), 'accessModifier');
         this.setInputsInline(false);
         this.setPreviousStatement(true, ['class-container', 'variable-container', 'method-container']);

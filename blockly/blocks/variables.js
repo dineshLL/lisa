@@ -23,3 +23,28 @@ Blockly.Blocks['variable'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };
+
+/**
+ * parameter block
+ *
+ * @type {{init: Blockly.Blocks.parameter.init}}
+ */
+Blockly.Blocks['parameter'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter")
+            .appendField("of type");
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["String", "String"], ["real", "real"]]), "data_types");
+        this.appendDummyInput()
+            .appendField("initialized to")
+            .appendField(new Blockly.FieldTextInput("0"), "initial_value");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(240);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
+
