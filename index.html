@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home | ProtoSwipe</title>
+    <title>Home | Lisa</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
                 </button>
 
                 <a class="navbar-brand" href="index.html">
-                    <h1><!-- <img src="images/logo.png" alt="logo">--> ProtoSwipe</h1>
+                    <h1><!-- <img src="images/logo.png" alt="logo">--> Lisa</h1>
                 </a>
 
             </div>
@@ -57,8 +57,8 @@
         <div class="row">
             <div class="main-slider">
                 <div class="slide-text">
-                    <h1>We Are Creative Nerds</h1>
-                    <p>ProtoSwipe is an online tool which teach Object Oriented concepts to the users. This intuitive tool also helps the users be familierize with C++ syntaxes while they learn OOP concepts.</p>
+                    <h1>Lisa Coding Blocks</h1>
+                    <p>Lisa is an online tool which teach Object Oriented concepts to the users. This intuitive tool also helps the users be familierize with C++ syntaxes while they learn OOP concepts.</p>
                     <a  id="playground" class="btn btn-common">PLAYGROUD</a>
                 </div>
                 <img src="images/home/slider/hill.png" class="slider-hill" alt="slider image">
@@ -89,20 +89,42 @@
     </div>
 </section>
 <section>
-    <section class="col-xs-8">
-        <div id="blocklyDiv" style="height: 480px; width: 1200px;margin:5%;position:center"></div>
+    <section class="col-xs-6">
+        <div id="blocklyDiv" style="height: 480px; width: 800px;margin:5%;position:left"></div>
         <xml id="toolbox">
             <category name="Containers">
-                <block type="class-container"></block>
-                <block type="variable-container"></block>
+                 <category name="Class Container">
+                    <block type="class-container"></block>
+                 </category>
+                <category name="Varialble Container">
+                    <block type="variable-container"></block>
+                </category>
+                <category name="Method Container">
+                    <block type="method-container"></block>
+                </category>
+            </category>
+            <category name="Methods">
+                <category name="Method">
+                    <block type="method"></block>
+                </category>
+                <category name="Constructor Method">
+                    <block type="constructor"></block>
+                </category>
             </category>
             <category name="Variables">
                 <block type="variable"></block>
+            </category>
+            <category name="Parameters">
                 <block type="parameter"></block>
             </category>
+          
+
         </xml>
     </section>
-    <aside class="col-xs-4">
+   
+</section>
+
+ <aside class="col-xs-7" style="height: 400px; width: 500px;margin-left:10%">
         <div id="code-wrapper" class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Code</h3>
@@ -110,7 +132,6 @@
             <pre id="code" class="panel-body pre-scrollable"></pre>
         </div>
     </aside>
-</section>
 
 <div class="col-xs-4">
 
@@ -215,8 +236,8 @@
                             <a href="#"><img src="images/home/profile1.png" hidden alt=""></a>
                         </div>
                         <div class="media-body">
-                            <blockquote>Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore tail.</blockquote>
-                            <h3><a href="#">- Jhon Kalis</a></h3>
+                            <blockquote>Controlling complexity is the essence of computer programming.</blockquote>
+                            <h3><a href="#"> - Brian Kernighan</a></h3>
                         </div>
                     </div>
                     <div class="media">
@@ -224,8 +245,8 @@
                             <a href="#"><img src="images/home/profile2.png" hidden alt=""></a>
                         </div>
                         <div class="media-body">
-                            <blockquote>Capicola nisi flank sed minim sunt aliqua rump pancetta leberkas venison eiusmod.</blockquote>
-                            <h3><a href="">- Abraham Josef</a></h3>
+                            <blockquote>Beauty is more important in computing than anywhere else in technology because software is so complicated. Beauty is the ultimate defence against complexity.</blockquote>
+                            <h3><a href="">- David Gelernter</a></h3>
                         </div>
                     </div>
                 </div>
@@ -255,7 +276,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="copyright-text text-center">
-                    <p>&copy; Your Company 2016. All Rights Reserved.</p>
+                    <p>&copy; Lisa 2016. All Rights Reserved.</p>
 
                 </div>
             </div>

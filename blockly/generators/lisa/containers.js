@@ -24,9 +24,18 @@ Blockly.lisa['class-container'] = function(block) {
 };
 
 Blockly.lisa['variable-container'] = function(block) {
-    var dropdown_accessmodifire = block.getFieldValue('accessModifier');
+    var dropdown_accessmodifire = block.getFieldValue('access-modifier');
     var statements_variables = Blockly.lisa.statementToCode(block, 'variables');
     // TODO: Assemble JavaScript into code variable.
     var code = dropdown_accessmodifire +':\n' + statements_variables;
     return code;
 };
+
+Blockly.lisa['method-container'] = function(block) {
+  var dropdown_access_modifier = block.getFieldValue('access-modifier');
+  var statements_inputs = Blockly.lisa.statementToCode(block, 'inputs');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_access_modifier +':\n' + statements_inputs;
+  return code;
+};
+

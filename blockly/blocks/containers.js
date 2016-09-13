@@ -43,7 +43,7 @@ Blockly.Blocks['variable-container'] = {
     init: function() {
         this.appendStatementInput('variables')
             .setCheck(null)
-            .appendField(new Blockly.FieldDropdown([['private', 'private'], ['public', 'public'], ['protected', 'protected'], ['default', 'default']]), 'accessModifier');
+            .appendField(new Blockly.FieldDropdown([['private', 'private'], ['public', 'public'], ['protected', 'protected'], ['default', 'default']]), 'access-modifier');
         this.setInputsInline(false);
         this.setPreviousStatement(true, ['class-container', 'variable-container', 'method-container']);
         this.setNextStatement(true, ['class-container', 'variable-container', 'method-container']);
@@ -52,3 +52,18 @@ Blockly.Blocks['variable-container'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };
+
+Blockly.Blocks['method-container'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["public", "public"], ["protected", "protected"], ["private", "private"]]), "access-modifier");
+    this.appendStatementInput("inputs")
+        .setCheck("method");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["method-container", "constructor-container", "variable-container"]);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+

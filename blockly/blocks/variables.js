@@ -30,21 +30,53 @@ Blockly.Blocks['variable'] = {
  * @type {{init: Blockly.Blocks.parameter.init}}
  */
 Blockly.Blocks['parameter'] = {
-    init: function() {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter")
-            .appendField("of type");
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["String", "String"], ["real", "real"]]), "data_types");
-        this.appendDummyInput()
-            .appendField("initialized to")
-            .appendField(new Blockly.FieldTextInput("0"), "initial_value");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(240);
-        this.setTooltip('');
-        this.setHelpUrl('http://www.example.com/');
-    }
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter-name")
+        .appendField("parameter")
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["string", "string"], ["real", "real"]]), "NAME");
+    this.setPreviousStatement(true, "parameter");
+    this.setNextStatement(true, "parameter");
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
 };
 
+/**
+ * method block
+ *
+ * @type {{init: Blockly.Blocks.method.init}}
+ */
+Blockly.Blocks['method'] = {
+  init: function() {
+    this.appendStatementInput("NAME")
+        .setCheck("parameter")
+        .appendField(new Blockly.FieldDropdown([["void", "void"], ["int", "int"], ["String", "String"], ["float", "float"], ["double", "double"], ["char", "char"]]), "NAME")
+        .appendField(new Blockly.FieldTextInput("MethodA"), "MethodA");
+    this.setPreviousStatement(true, "method");
+    this.setNextStatement(true, "method");
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+/**
+ * constructor block
+ *
+ * @type {{init: Blockly.Blocks.constructor.init}}
+ */
+Blockly.Blocks['constructor'] = {
+  init: function() {
+    this.appendStatementInput("NAME")
+        .setCheck("parameter")
+        .appendField("void")
+        .appendField(new Blockly.FieldTextInput("_constructor"), "constructor-name");
+    this.setPreviousStatement(true, ["variable-container", "method-container"]);
+    this.setNextStatement(true, ["variable-container", "method-container"]);
+    this.setColour(330);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

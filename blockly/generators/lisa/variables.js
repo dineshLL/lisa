@@ -12,7 +12,7 @@ Blockly.lisa['variable'] = function(block) {
     var text_varname = block.getFieldValue('varName');
     var value_initvalue = Blockly.lisa.valueToCode(block, 'initValue', Blockly.lisa.ORDER_ATOMIC);
     // TODO: Assemble lisa into code variable.
-    var code = '\t' + dropdown_variabletype + ' ' +text_varname + ' = 0;\n';
+    var code = '\t' + dropdown_variabletype + ' ' +text_varname + '=0;\n';
     return code;
 };
 
@@ -23,14 +23,39 @@ Blockly.lisa['variable'] = function(block) {
  * @returns {string}
  */
 Blockly.lisa['parameter'] = function(block) {
-    var text_parameter = block.getFieldValue('parameter');
-    var dropdown_data_types = block.getFieldValue('data_types');
-    var text_initial_value = block.getFieldValue('initial_value');
-    // TODO: Assemble JavaScript into code variable.
-    if(text_initial_value != null || text_initial_value != '' || text_initial_value != ' '){
-        var code = dropdown_data_types+' '+text_parameter+' = '+text_initial_value;
-    }else {
-        var code = dropdown_data_types+' '+text_parameter;
-    }
-    return code;
+  var text_parameter_name = block.getFieldValue('parameter-name');
+  var dropdown_name = block.getFieldValue('NAME');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_name+' '+text_parameter_name;
+  return code;
+};
+
+/**
+ * method block
+ *
+ * @method block
+ * @returns {string}
+ */
+
+Blockly.lisa['method'] = function(block) {
+  var dropdown_name = block.getFieldValue('NAME');
+  var text_methoda = block.getFieldValue('MethodA');
+  var statements_name = Blockly.lisa.statementToCode(block, 'NAME');
+  // TODO: Assemble JavaScript into code variable.
+  var code = ''+dropdown_name+' '+ text_methoda + ' (' +statements_name + ' ){}\n';
+  return code;
+};
+
+/**
+ * constructor block
+ *
+ * @constructor block
+ * @returns {string}
+ */
+Blockly.lisa['constructor'] = function(block) {
+  var text_constructor_name = block.getFieldValue('constructor-name');
+  var statements_name = Blockly.lisa.statementToCode(block, 'NAME');
+  // TODO: Assemble JavaScript into code variable.
+   var code = 'void'+' '+text_constructor_name + ' (' +statements_name + ' ){}\n';
+  return code;
 };
