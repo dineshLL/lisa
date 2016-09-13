@@ -16,8 +16,8 @@ Blockly.Blocks['variable'] = {
         this.appendValueInput("initValue")
             .setCheck("Number");
         this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
+        this.setPreviousStatement(true, ['variable']);
+        this.setNextStatement(true, ['variable']);
         this.setColour(290);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');

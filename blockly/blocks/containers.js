@@ -24,7 +24,7 @@ Blockly.Blocks['class-container'] = {
 Blockly.Blocks['variable-container'] = {
     init: function() {
         this.appendStatementInput('variables')
-            .setCheck(null)
+            .setCheck(['variable'])
             .appendField(new Blockly.FieldDropdown([['private', 'private'], ['public', 'public'], ['protected', 'protected'], ['default', 'default']]), 'accessModifier');
         this.setInputsInline(false);
         this.setPreviousStatement(true, ['class-container', 'variable-container', 'method-container']);
