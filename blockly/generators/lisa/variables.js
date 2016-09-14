@@ -20,10 +20,9 @@ Blockly.lisa['variable'] = function(block) {
     var text_varname = block.getFieldValue('varName');
     var value_initvalue = Blockly.lisa.valueToCode(block, 'initValue', Blockly.lisa.ORDER_ATOMIC);
     // TODO: Assemble lisa into code variable.
-    var code = '\t' + dropdown_variabletype + ' ' +text_varname + '=0;\n';
+    var code = '\t' + dropdown_variabletype + ' ' +text_varname + ' = 0;\n';
     return code;
 };
-
 
 /**
  * Code generation stub for parameter block

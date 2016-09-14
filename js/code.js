@@ -17,11 +17,11 @@ function renderContent() {
   var content = document.getElementById('code');
   var code = Blockly.lisa.workspaceToCode();
   content.textContent = code;
-  if (typeof prettyPrintOne == 'function') {
+  /*if (typeof prettyPrintOne == 'function') {
     code = content.innerHTML;
     code = prettyPrintOne(code, 'c');
     content.innerHTML = code;
-  }
+  }*/
 }
 
 /**
