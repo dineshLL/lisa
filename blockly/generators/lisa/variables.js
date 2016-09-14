@@ -4,9 +4,17 @@
 
 'use strict';
 
+// Why below providers have commented?
 /*goog.provide('Blockly.lisa.variables');
 goog.require('Blockly.lisa');*/
 
+// @Todo : Please move to 'method' & 'constructor' code generation stubs to different files as they are not relevant here
+
+/**
+ * Code generation stub for variable block
+ * @param block
+ * @returns {string}
+ */
 Blockly.lisa['variable'] = function(block) {
     var dropdown_variabletype = block.getFieldValue('variableType');
     var text_varname = block.getFieldValue('varName');
@@ -16,9 +24,9 @@ Blockly.lisa['variable'] = function(block) {
     return code;
 };
 
+
 /**
- * parameter block
- *
+ * Code generation stub for parameter block
  * @param block
  * @returns {string}
  */
@@ -30,13 +38,12 @@ Blockly.lisa['parameter'] = function(block) {
   return code;
 };
 
+
 /**
- * method block
- *
+ * Code generation stub for method block
  * @method block
  * @returns {string}
  */
-
 Blockly.lisa['method'] = function(block) {
   var dropdown_name = block.getFieldValue('NAME');
   var text_methoda = block.getFieldValue('MethodA');
@@ -46,9 +53,9 @@ Blockly.lisa['method'] = function(block) {
   return code;
 };
 
+
 /**
- * constructor block
- *
+ * Code generation stub for constructor block
  * @constructor block
  * @returns {string}
  */
