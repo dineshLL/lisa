@@ -43,9 +43,9 @@ Blockly.Blocks['variable'] = {
 Blockly.Blocks['parameter'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter-name")
-        .appendField("parameter")
-        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["string", "string"], ["real", "real"]]), "NAME");
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["string", "string"], ["real", "real"]]), "NAME")
+        .appendField("parameter as")
+        .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter-name");
     this.setPreviousStatement(true, "parameter");
     this.setNextStatement(true, "parameter");
     this.setColour(230);

@@ -20,7 +20,7 @@ Blockly.lisa['variable'] = function(block) {
     var text_varname = block.getFieldValue('varName');
     var value_initvalue = Blockly.lisa.valueToCode(block, 'initValue', Blockly.lisa.ORDER_ATOMIC);
     // TODO: Assemble lisa into code variable.
-    var code = '\t' + dropdown_variabletype + ' ' +text_varname + ' = 0;\n';
+    var code = dropdown_variabletype + ' ' +text_varname + ' = 0;\n';
     return code;
 };
 
@@ -33,7 +33,7 @@ Blockly.lisa['parameter'] = function(block) {
   var text_parameter_name = block.getFieldValue('parameter-name');
   var dropdown_name = block.getFieldValue('NAME');
   // TODO: Assemble JavaScript into code variable.
-  var code = dropdown_name+' '+text_parameter_name;
+  var code = dropdown_name + ' ' + text_parameter_name + '$$'; //adding $$ to use it as a delimiter
   return code;
 };
 
@@ -45,10 +45,24 @@ Blockly.lisa['parameter'] = function(block) {
  */
 Blockly.lisa['method'] = function(block) {
   var dropdown_name = block.getFieldValue('NAME');
-  var text_methoda = block.getFieldValue('MethodA');
-  var statements_name = Blockly.lisa.statementToCode(block, 'NAME');
-  // TODO: Assemble JavaScript into code variable.
-  var code = ''+dropdown_name+' '+ text_methoda + ' (' +statements_name + ' ){}\n';
+  var text_methodName = block.getFieldValue('MethodA');
+  var branch = Blockly.lisa.statementToCode(block, 'NAME')
+  // TODO: Assemble JavaScript into code variable
+    var params = branch.split('$$');
+    console.log(params.length);
+    console.log(params);
+    if(params.length > 2) {
+        for(var i = 0; i < params.length - 3; i++) {
+            params[i] = params[i] + ', ';
+        }
+        branch = params.join();
+
+    } else {
+        branch = params.join();
+    }
+    // removing the starting indentation and last comma
+    branch = branch.substring(2, branch.lastIndexOf(','));
+  var code = dropdown_name+' '+ text_methodName + '('+branch+ ') {}\n';
   return code;
 };
 
