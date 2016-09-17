@@ -3,7 +3,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,18 +30,16 @@ goog.provide('Blockly.FieldDropdown');
 
 goog.require('Blockly.Field');
 goog.require('goog.dom');
-goog.require('goog.events');
 goog.require('goog.style');
 goog.require('goog.ui.Menu');
 goog.require('goog.ui.MenuItem');
-goog.require('goog.userAgent');
 
 
 /**
  * Class for an editable dropdown field.
- * @param {(!Array.<!Array.<string>>|!Function)} menuGenerator An array of
- *     options for a dropdown list, or a function which generates these options.
- * @param {Function=} opt_validator A function that is executed when a new
+ * @param {(!Array.<string>|!Function)} menuGenerator An array of options
+ *     for a dropdown list, or a function which generates these options.
+ * @param {Function} opt_changeHandler A function that is executed when a new
  *     option is selected, with the newly selected value as its sole argument.
  *     If it returns a value, that value (which must be one of the options) will
  *     become selected in place of the newly selected option, unless the return
@@ -49,14 +47,22 @@ goog.require('goog.userAgent');
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldDropdown = function(menuGenerator, opt_validator) {
+Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler, block) {
   this.menuGenerator_ = menuGenerator;
+  this.changeHandler_ = opt_changeHandler;
   this.trimOptions_();
-  var firstTuple = this.getOptions_()[0];
+  var firstTuple = this.getOptions_(block)[0];
+  this.value_ = firstTuple[1];
+  this.block = block;
 
+  // Add dropdown arrow: "option ▾" (LTR) or "▾ אופציה" (RTL)
+  // Android can't (in 2014) display "▾", so use "▼" instead.
+  var arrowChar = goog.userAgent.ANDROID ? '\u25BC' : '\u25BE';
+  this.arrow_ = Blockly.createSvgElement('tspan', {}, null);
+  this.arrow_.appendChild(document.createTextNode(
+      Blockly.RTL ? arrowChar + ' ' : ' ' + arrowChar));
   // Call parent's constructor.
-  Blockly.FieldDropdown.superClass_.constructor.call(this, firstTuple[1],
-      opt_validator);
+  Blockly.FieldDropdown.superClass_.constructor.call(this, firstTuple[0]);
 };
 goog.inherits(Blockly.FieldDropdown, Blockly.Field);
 
@@ -66,9 +72,13 @@ goog.inherits(Blockly.FieldDropdown, Blockly.Field);
 Blockly.FieldDropdown.CHECKMARK_OVERHANG = 25;
 
 /**
- * Android can't (in 2014) display "▾", so use "▼" instead.
+ * Clone this FieldDropdown.
+ * @return {!Blockly.FieldDropdown} The result of calling the constructor again
+ *   with the current values of the arguments used during construction.
  */
-Blockly.FieldDropdown.ARROW_CHAR = goog.userAgent.ANDROID ? '\u25BC' : '\u25BE';
+Blockly.FieldDropdown.prototype.clone = function() {
+  return new Blockly.FieldDropdown(this.menuGenerator_, this.changeHandler_);
+};
 
 /**
  * Mouse cursor style when over the hotspot that initiates the editor.
@@ -76,41 +86,23 @@ Blockly.FieldDropdown.ARROW_CHAR = goog.userAgent.ANDROID ? '\u25BC' : '\u25BE';
 Blockly.FieldDropdown.prototype.CURSOR = 'default';
 
 /**
- * Install this dropdown on a block.
- */
-Blockly.FieldDropdown.prototype.init = function() {
-  if (this.fieldGroup_) {
-    // Dropdown has already been initialized once.
-    return;
-  }
-  // Add dropdown arrow: "option ▾" (LTR) or "▾ אופציה" (RTL)
-  this.arrow_ = Blockly.createSvgElement('tspan', {}, null);
-  this.arrow_.appendChild(document.createTextNode(
-      this.sourceBlock_.RTL ? Blockly.FieldDropdown.ARROW_CHAR + ' ' :
-          ' ' + Blockly.FieldDropdown.ARROW_CHAR));
-
-  Blockly.FieldDropdown.superClass_.init.call(this);
-  // Force a reset of the text to add the arrow.
-  var text = this.text_;
-  this.text_ = null;
-  this.setText(text);
-};
-
-/**
  * Create a dropdown menu under the text.
  * @private
  */
 Blockly.FieldDropdown.prototype.showEditor_ = function() {
-  Blockly.WidgetDiv.show(this, this.sourceBlock_.RTL, null);
+  Blockly.WidgetDiv.show(this, null);
   var thisField = this;
 
   function callback(e) {
     var menuItem = e.target;
     if (menuItem) {
       var value = menuItem.getValue();
-      if (thisField.sourceBlock_) {
-        // Call any validation function, and allow it to override.
-        value = thisField.callValidator(value);
+      if (thisField.changeHandler_) {
+        // Call any change handler, and allow it to override.
+        var override = thisField.changeHandler_(value);
+        if (override !== undefined) {
+          value = override;
+        }
       }
       if (value !== null) {
         thisField.setValue(value);
@@ -120,59 +112,38 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   }
 
   var menu = new goog.ui.Menu();
-  menu.setRightToLeft(this.sourceBlock_.RTL);
-  var options = this.getOptions_();
-  for (var i = 0; i < options.length; i++) {
-    var text = options[i][0];  // Human-readable text.
-    var value = options[i][1]; // Language-neutral value.
+  var options = this.getOptions_(this.block);
+  for (var x = 0; x < options.length; x++) {
+    var text = options[x][0];  // Human-readable text.
+    var value = options[x][1]; // Language-neutral value.
     var menuItem = new goog.ui.MenuItem(text);
-    menuItem.setRightToLeft(this.sourceBlock_.RTL);
     menuItem.setValue(value);
     menuItem.setCheckable(true);
     menu.addChild(menuItem, true);
     menuItem.setChecked(value == this.value_);
   }
-  // Listen for mouse/keyboard events.
   goog.events.listen(menu, goog.ui.Component.EventType.ACTION, callback);
-  // Listen for touch events (why doesn't Closure handle this already?).
-  function callbackTouchStart(e) {
-    var control = this.getOwnerControl(/** @type {Node} */ (e.target));
-    // Highlight the menu item.
-    control.handleMouseDown(e);
-  }
-  function callbackTouchEnd(e) {
-    var control = this.getOwnerControl(/** @type {Node} */ (e.target));
-    // Activate the menu item.
-    control.performActionInternal(e);
-  }
-  menu.getHandler().listen(menu.getElement(), goog.events.EventType.TOUCHSTART,
-                           callbackTouchStart);
-  menu.getHandler().listen(menu.getElement(), goog.events.EventType.TOUCHEND,
-                           callbackTouchEnd);
-
   // Record windowSize and scrollOffset before adding menu.
   var windowSize = goog.dom.getViewportSize();
   var scrollOffset = goog.style.getViewportPageOffset(document);
-  var xy = this.getAbsoluteXY_();
-  var borderBBox = this.getScaledBBox_();
+  var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
+  var borderBBox = this.borderRect_.getBBox();
   var div = Blockly.WidgetDiv.DIV;
   menu.render(div);
   var menuDom = menu.getElement();
   Blockly.addClass_(menuDom, 'blocklyDropdownMenu');
   // Record menuSize after adding menu.
   var menuSize = goog.style.getSize(menuDom);
-  // Recalculate height for the total content, not only box height.
-  menuSize.height = menuDom.scrollHeight;
 
   // Position the menu.
   // Flip menu vertically if off the bottom.
   if (xy.y + menuSize.height + borderBBox.height >=
       windowSize.height + scrollOffset.y) {
-    xy.y -= menuSize.height + 2;
+    xy.y -= menuSize.height;
   } else {
     xy.y += borderBBox.height;
   }
-  if (this.sourceBlock_.RTL) {
+  if (Blockly.RTL) {
     xy.x += borderBBox.width;
     xy.x += Blockly.FieldDropdown.CHECKMARK_OVERHANG;
     // Don't go offscreen left.
@@ -186,8 +157,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
       xy.x = windowSize.width + scrollOffset.x - menuSize.width;
     }
   }
-  Blockly.WidgetDiv.position(xy.x, xy.y, windowSize, scrollOffset,
-                             this.sourceBlock_.RTL);
+  Blockly.WidgetDiv.position(xy.x, xy.y, windowSize, scrollOffset);
   menu.setAllowAutoFocus(true);
   menuDom.focus();
 };
@@ -223,11 +193,11 @@ Blockly.FieldDropdown.prototype.trimOptions_ = function() {
   }
   // Remove the prefix and suffix from the options.
   var newOptions = [];
-  for (var i = 0; i < options.length; i++) {
-    var text = options[i][0];
-    var value = options[i][1];
+  for (var x = 0; x < options.length; x++) {
+    var text = options[x][0];
+    var value = options[x][1];
     text = text.substring(prefixLength, text.length - suffixLength);
-    newOptions[i] = [text, value];
+    newOptions[x] = [text, value];
   }
   this.menuGenerator_ = newOptions;
 };
@@ -238,9 +208,9 @@ Blockly.FieldDropdown.prototype.trimOptions_ = function() {
  *     (human-readable text, language-neutral name).
  * @private
  */
-Blockly.FieldDropdown.prototype.getOptions_ = function() {
+Blockly.FieldDropdown.prototype.getOptions_ = function(block) {
   if (goog.isFunction(this.menuGenerator_)) {
-    return this.menuGenerator_.call(this);
+    return this.menuGenerator_.call(this, block);
   }
   return /** @type {!Array.<!Array.<string>>} */ (this.menuGenerator_);
 };
@@ -258,20 +228,13 @@ Blockly.FieldDropdown.prototype.getValue = function() {
  * @param {string} newValue New value to set.
  */
 Blockly.FieldDropdown.prototype.setValue = function(newValue) {
-  if (newValue === null || newValue === this.value_) {
-    return;  // No change if null.
-  }
-  if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
-    Blockly.Events.fire(new Blockly.Events.Change(
-        this.sourceBlock_, 'field', this.name, this.value_, newValue));
-  }
   this.value_ = newValue;
   // Look up and display the human-readable text.
   var options = this.getOptions_();
-  for (var i = 0; i < options.length; i++) {
+  for (var x = 0; x < options.length; x++) {
     // Options are tuples of human-readable text and language-neutral values.
-    if (options[i][1] == newValue) {
-      this.setText(options[i][0]);
+    if (options[x][1] == newValue) {
+      this.setText(options[x][0]);
       return;
     }
   }
@@ -285,9 +248,9 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
  * @param {?string} text New text.
  */
 Blockly.FieldDropdown.prototype.setText = function(text) {
-  if (this.sourceBlock_ && this.arrow_) {
+  if (this.sourceBlock_) {
     // Update arrow's colour.
-    this.arrow_.style.fill = this.sourceBlock_.getColour();
+    this.arrow_.style.fill = Blockly.makeColour(this.sourceBlock_.getColour());
   }
   if (text === null || text === this.text_) {
     // No change if null.
@@ -296,18 +259,17 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
   this.text_ = text;
   this.updateTextNode_();
 
-  if (this.textElement_) {
-    // Insert dropdown arrow.
-    if (this.sourceBlock_.RTL) {
-      this.textElement_.insertBefore(this.arrow_, this.textElement_.firstChild);
-    } else {
-      this.textElement_.appendChild(this.arrow_);
-    }
+  // Insert dropdown arrow.
+  if (Blockly.RTL) {
+    this.textElement_.insertBefore(this.arrow_, this.textElement_.firstChild);
+  } else {
+    this.textElement_.appendChild(this.arrow_);
   }
 
   if (this.sourceBlock_ && this.sourceBlock_.rendered) {
     this.sourceBlock_.render();
     this.sourceBlock_.bumpNeighbours_();
+    this.sourceBlock_.workspace.fireChangeEvent();
   }
 };
 
@@ -317,4 +279,220 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
 Blockly.FieldDropdown.prototype.dispose = function() {
   Blockly.WidgetDiv.hideIfOwner(this);
   Blockly.FieldDropdown.superClass_.dispose.call(this);
+};
+
+
+/**
+ * get type/dimension/ from variables name
+ * @param blockVars: name of current block
+ * @param option: wanted value -> type = 0, dimension = 5
+ * @returns {*}
+ */
+Blockly.FieldDropdown.prototype.getTypefromVars = function(blockVars, option) {
+
+    var wantedValue;
+    var variableList = Blockly.Variables.allVariables();
+
+    for (var temp = 0; temp < variableList.length; temp++) {
+        if (variableList[temp][2] == blockVars) {
+            wantedValue = variableList[temp][option];
+        }
+    }
+    return wantedValue;
+};
+
+
+/* 너무 지저분 해 ~_~*/
+/**
+ * get parent type of the current block
+ * @param curBlock : current block
+ * @param strDist : string type of dist('variables', 'variables_pointer', 'varibles_array')
+ * @returns {*}
+ */
+Blockly.FieldDropdown.prototype.getParentType = function(curBlock, strDist) {
+
+    var parentType = null;
+
+
+    if (curBlock.getParent()) {
+        var parent = curBlock.getParent();
+
+
+        // control_for
+        if ((curBlock.type == 'controls_for')) {
+            return null;
+        }
+
+        // function call block
+        if ((parent.type.match('procedures_callreturn'))) {
+            parent = parent.getParent();
+        }
+
+        // type 1
+        // VARIABLE setter + (* POINTER getter)
+        // POINTER setter + (& VARIABLE getter)
+        if (((parent.type == (strDist + '_*' )) && (parent.getParent().type == 'variables_set') )||
+            ((parent.type == (strDist + '_pointer_&')) && parent.getParent().type == (strDist + '_pointer_set'))) {
+            var parentVars = parent.getParent().getVars();
+            parentType = this.getTypefromVars(parentVars, 0);
+
+        }
+
+        // type 2
+        // VARIABLE declare + (* POINTER getter),
+        // POINTER declare + (& VARIABLE getter)
+        else if (((parent.type == (strDist + '_pointer_&')) || (parent.type == (strDist + '_pointer_*')))
+            && parent.getParent()) {
+
+            if (parent.getParent().getVars()){
+                parentType = parent.getParent().getTypes();
+
+            }
+        }
+
+        // type 3
+        // DOUBLE POINTER declare + (& POINTER getter)
+        // POINTER declare + (* DOUBLE POINTER getter)
+        else if (((parent.type == (strDist + '_&')) || (parent.type == (strDist + '_*'))) &&
+            (parent.getParent().type == (strDist + '_declare')))
+        {
+            var ptrSpec = parent.getParent().getSpec();
+            // DOUBLE POINTER declare + (& POINTER getter)
+            if ((ptrSpec == '**') && (parent.type == (strDist + '_&'))) {
+                parentType = parent.getParent().getType();
+
+            }
+            // POINTER declare + (* DOUBLE POINTER getter)
+            else if ((ptrSpec == '*') && (parent.type == (strDist + '_*')))
+            {
+                parentType = parent.getParent().getType();
+                parentType = 'db' + parentType;
+            }
+        }
+
+        // type 4
+        // DOUBLE POINTER setter + (& Pointer getter)
+        // POINTER setter + (* DOUBLE POINTER getter)
+        else if ((parent.type == (strDist + '_&') || (parent.type == (strDist + '_*'))) &&
+            (parent.getParent().type ==  (strDist + '_set'))){
+
+            var parentVars = parent.getParent().getVars();
+            var dimension = this.getTypefromVars(parentVars, 5);
+            parentType = this.getTypefromVars(parentVars, 0);
+
+            // DOUBLE POINTER setter + (& Pointer getter)
+            if(dimension == '**' && (parent.type == (strDist + '_&')) ){
+                parentType = parentType.replace("db", "");
+            }
+            // POINTER setter + (* DOUBLE POINTER getter)
+            else if (dimension == '*' && (parent.type == (strDist + '_*'))) {
+                parentType = 'db' + parentType;
+            }
+
+        }
+
+        // type 4
+        // POINTER setter + malloc
+        // setter + getter (any type)
+        else if (((curBlock.type =='library_stdlib_malloc') ||(curBlock.type == (strDist+'_get')))
+                && (parent.type.search('_set') > 0)) {
+            var ParentVars = parent.getVars();
+
+            // when pointer_set block
+            if (strDist == 'variables_pointer'){
+                ParentVars = ParentVars.toString().replace("* ", "");
+            }
+            parentType = this.getTypefromVars(ParentVars, 0);
+        }
+
+
+        // type 5
+        // declare block + get block (any type)
+        else if (((curBlock.type != (strDist+'_set')) && parent.type.match('_declare'))) {
+            if (parent.getDeclare()) {
+                parentType = parent.getTypes();
+            }
+        }
+
+        // type 6
+        // main block: int
+        else if ((parent.type.match('main_block'))) {
+            parentType = 'int';
+        }
+
+        //type 7
+        // return block in function block
+        else if((parent.type.match('procedures_return'))) {
+            parentType = parent.getType();
+        }
+
+    }
+    return parentType;
+};
+
+/**
+ * make dropdown list with adequate type
+ * @param block
+ * @param varDist - variable dist~(0:define / 1:variable / 2:pointer / 3:array)
+ * charDist : character type of dist('d', 'v', 'p', 'a')
+ * strDist: string type of dist - for block type ('define', 'variables', 'variables_pointer', 'variables_array')
+ * @returns {Array}
+ */
+
+Blockly.FieldDropdown.prototype.listCreate = function(block, varDist) {
+    var variableList = Blockly.Variables.allVariables();
+    var variableListPop = []; // 보여줄 리스트 거를 것.
+    var thisPosition = block.getRelativeToSurfaceXY().y;
+
+    var charDist, strDist;
+    switch(varDist) {
+        case 0:
+            charDist = 'd';
+            strDist = 'define';
+            break;
+        case 1:
+            charDist = 'v';
+            strDist = 'variables';
+            break;
+        case 2:
+            charDist = 'p';
+            strDist = 'variables_pointer';
+            break;
+        case 3:
+            charDist = 'a';
+            strDist = 'variables_array';
+            break;
+        default:
+            break;
+    }
+
+    var parentType = Blockly.FieldDropdown.prototype.getParentType(block, strDist);
+
+    while((block.getSurroundParent()) && (block.getSurroundParent().type != 'main_block') &&
+    (block.getSurroundParent().type != 'procedures_defnoreturn') && (block.getSurroundParent().type != 'procedures_defreturn')){
+        block = block.getSurroundParent();
+    }
+    var scope;
+    if(block.getSurroundParent()) {
+        scope = block.getSurroundParent().getName();
+    }
+
+    for (var temp = 0; temp < variableList.length; temp++){
+        if(variableList[temp][1] == charDist){
+            if(variableList[temp][3] == scope || variableList[temp][3] == "Global"){
+                if(variableList[temp][4] < (thisPosition - 10)) {
+                    if (parentType != null) {
+                        if (variableList[temp][0] == parentType) {
+                            variableListPop.push(variableList[temp][2]);
+                        }
+                    }
+                    else {
+                        variableListPop.push(variableList[temp][2]);
+                    }
+                }
+            }
+        }
+    }
+
+    return variableListPop;
 };
