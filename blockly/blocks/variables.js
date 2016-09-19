@@ -62,3 +62,14 @@ Blockly.Blocks['boolean_input'] = {
         this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
     }
 };
+
+Blockly.Blocks['boolean_input'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+        this.setOutput(true, "Number");
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};

@@ -26,7 +26,6 @@
 'use strict';
 
 goog.provide('Blockly.lisa');
-
 goog.require('Blockly.Generator');
 
 
