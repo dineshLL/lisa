@@ -16,8 +16,9 @@ Blockly.lisa['class-container'] = function(block) {
 
     var text_class_name = block.getFieldValue('class_name');
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
-    var code = 'class '+ text_class_name +' {\n '+ statements_class_body +'\n}\n';
 
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'class '+ text_class_name +' {\n'+ statements_class_body +'\n}';
     return code;
 };
 
