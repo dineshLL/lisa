@@ -17,7 +17,6 @@ Blockly.Blocks['constructor'] = {
     init: function() {
         this.appendStatementInput("NAME")
             .setCheck("parameter")
-            .appendField("void")
             .appendField(new Blockly.FieldTextInput("_constructor"), "constructor-name");
         this.setPreviousStatement(true, ["variable-container", "method-container"]);
         this.setNextStatement(true, ["variable-container", "method-container"]);

@@ -12,14 +12,37 @@ goog.require('Blockly.lisa');
  * @param block
  * @returns {string}
  */
+var parentClass = '';
+
 Blockly.lisa['class-container'] = function(block) {
 
     var text_class_name = block.getFieldValue('class_name');
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
 
     // TODO: Assemble JavaScript into code variable.
-    var code = 'class '+ text_class_name +' {\n'+ statements_class_body +'\n}';
-    return code;
+    var code = 'class '+ text_class_name +' {\n'+ statements_class_body +'}';
+
+    var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
+    //res = res.replace('$$PARENT_CLASS_NAME$$', text_class_name);
+
+    return res;
+};
+
+/**
+ * Code generator stub for child-class-container block
+ * @param block
+ * @returns {string}
+ */
+Blockly.lisa['child-class-container'] = function(block) {
+
+    var text_class_name = block.getFieldValue('class_name');
+    var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
+
+    // TODO: Assemble JavaScript into code variable.
+    var parentClassName = this.parentBlock_.getFieldValue('class_name');
+    var code = '\n\nclass '+ text_class_name +': '+ parentClassName +' {\n'+ statements_class_body +'}';
+    var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
+    return res;
 };
 
 

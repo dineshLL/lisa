@@ -8,16 +8,32 @@
     <link href="css/lightbox.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/dracula.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
 
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body onload="start()">
+<!--<pre><code class="cpp">#include <iostream>
+
+    int main(int argc, char *argv[]) {
+
+    /* An annoying "Hello World" example */
+    for (auto i = 0; i < 0xFFFF; i++)
+    cout << "Hello, World!" << endl;
+
+    char c = '\n';
+    unordered_map <string, vector<string> > m;
+    m["key"] = "\\\\"; // this is an error
+
+    return -2e3 + 12l;
+    }</code></pre>-->
 <header id="header" style="border: 0px solid black">
     <div class="container"style="border: 0px solid black">
         <!--<div class="row" style="border: 1px solid black">-->
@@ -110,6 +126,7 @@
                 <category name="Containers">
                     <category name="Class Container">
                         <block type="class-container"></block>
+                        <block type="child-class-container"></block>
                     </category>
                     <category name="Varialble Container">
                         <block type="variable-container"></block>
@@ -142,7 +159,9 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Code</strong></h3>
                     </div>
-                    <pre id="code" style="height: 420px;margin: 0px; border:2px solid #CCCCCC" class="panel-body"></pre>
+                    <pre style="height: 420px;margin: 0px; border:2px solid #CCCCCC" class="panel-body">
+                        <code id="code" class="cpp"></code>
+                    </pre>
                 </div>
             </div>
 
@@ -175,16 +194,14 @@
                                 <h2 class="post-title bold"><a href="#">Class</a></h2>
                                 <h3 class="post-author"><a href="#"> Details</a></h3>
                                 <p>A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.
-                                    Below is an example of a basic Java class definition: <br> <br>
-
-                                    class Sample<br>
-                                    {<br>
-                                    <span style="padding-left:5em">public static void main(String[] args)</span><br>
-                                    <span style="padding-left:5em">{</span><br>
-                                        <span style="padding-left:10em">String sampleText = "Hello world!";</span><br>
-                                        <span style="padding-left:10em">System.out.println(sampleText);</span><br>
-                                        <span style="padding-left:5em">}</span><br>
-                                    } </p>
+                                    Below is an example of a basic Java class definition:</p>
+                                    <pre><code class="cpp">
+                                        class Sample {
+                                            public static void main(String[] args) {
+                                                String sampleText = "Hello world!";
+                                                System.out.println(sampleText);
+                                            }
+                                        } </code></pre>
 
                                 <p>
                                     The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java's built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.
@@ -302,7 +319,7 @@
 <script>
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
-    var onresize = function(e) {
+    /*var onresize = function(e) {
         // Compute the absolute coordinates and dimensions of blocklyArea.
         var element = blocklyArea;
         var x = 0;
@@ -318,9 +335,9 @@
         blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
         blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
     };
-    window.addEventListener('resize', onresize, false);
-    onresize();
-    Blockly.svgResize(workspace);
+    window.addEventListener('resize', onresize, false);*/
+    /*onresize();*/
+    /*Blockly.svgResize(workspace);*/
 
 </script>
 <!--/footer-->
