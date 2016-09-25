@@ -17,8 +17,8 @@ Blockly.Blocks['method'] = {
     init: function() {
         this.appendStatementInput("NAME")
             .setCheck("parameter")
-            .appendField(new Blockly.FieldDropdown([["void", "void"], ["int", "int"], ["String", "String"], ["float", "float"], ["double", "double"], ["char", "char"]]), "NAME")
-            .appendField(new Blockly.FieldTextInput("MethodA"), "MethodA");
+            .appendField(new Blockly.FieldDropdown([["void", "void"], ["int", "int"], ["String", "String"], ["float", "float"], ["double", "double"], ["char", "char"]]), "RETURN_TYPE")
+            .appendField(new Blockly.FieldTextInput("method"), "METHOD_NAME");
         this.setPreviousStatement(true, "method");
         this.setNextStatement(true, "method");
         this.setColour(120);

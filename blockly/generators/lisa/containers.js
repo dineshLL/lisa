@@ -12,8 +12,6 @@ goog.require('Blockly.lisa');
  * @param block
  * @returns {string}
  */
-var parentClass = '';
-
 Blockly.lisa['class-container'] = function(block) {
 
     var text_class_name = block.getFieldValue('class_name');
