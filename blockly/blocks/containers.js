@@ -85,9 +85,10 @@ Blockly.Blocks['method-container'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([['public', 'public'], ['protected', 'protected'], ['private', 'private']]), 'access-modifier');
     this.appendStatementInput('inputs')
-        .setCheck('method');
+        .setCheck(['method', 'constructor'])
+        .setAlign(Blockly.ALIGN_CENTRE);
     this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ['method-container', 'constructor-container', 'variable-container']);
+    this.setNextStatement(true, ['method-container', 'constructor', 'variable-container']);
     this.setColour(65);
     this.setTooltip(tooltip_method_container);
     this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');

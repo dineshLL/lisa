@@ -73,3 +73,42 @@ Blockly.Blocks['boolean_input'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };
+
+/**
+ * Object variable block definition
+ * @type {{init: Blockly.Blocks.objectVariable.init}}
+ */
+
+
+Blockly.Blocks['object-variable'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("myVariable"), "object_name")
+        .appendField("variable of object")
+        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+  }
+};
+
+/**
+ * Pointer  block definition
+ * @type {{init: Blockly.Blocks.objectVariable.init}}
+ */
+
+Blockly.Blocks['object-pointer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("myVariable"), "pointer_name")
+        .appendField("pointer of object")
+        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+    this.setPreviousStatement(true, ["object-pointer", "variable", "object-variable","variable-container"]);
+    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+  }
+};

@@ -35,3 +35,29 @@ Blockly.lisa['parameter'] = function(block) {
   var code = dropdown_name + ' ' + text_parameter_name + '$$'; //adding $$ to use it as a delimiter
   return code;
 };
+/**
+ * Code generation stub for object variable block
+ * @param block
+ * @returns {string}
+ */
+
+Blockly.lisa['object-variable'] = function(block) {
+  var text_object_name = block.getFieldValue('object_name');
+  var text_class_name = block.getFieldValue('class_name');
+  // TODO: Assemble JavaScript into code variable.
+  var code = text_class_name+' '+text_object_name+';\n';
+  return code;
+};
+/**
+ * Code generation stub for pointer variable block
+ * @param block
+ * @returns {string}
+ */
+
+Blockly.lisa['object-pointer'] = function(block) {
+  var text_pointer_name = block.getFieldValue('pointer_name');
+  var class_name = block.getFieldValue('class_name');
+  // TODO: Assemble JavaScript into code variable.
+  var code = class_name+' '+'*'+text_pointer_name+';\n';
+  return code;
+};
