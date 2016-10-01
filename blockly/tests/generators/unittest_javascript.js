@@ -1,9 +1,8 @@
 /**
- * @license
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,15 +34,15 @@ Blockly.JavaScript['unittest_main'] = function(block) {
         '  var report = [];',
         '  var summary = [];',
         '  var fails = 0;',
-        '  for (var i = 0; i < ' + resultsVar + '.length; i++) {',
-        '    if (' + resultsVar + '[i][0]) {',
+        '  for (var x = 0; x < ' + resultsVar + '.length; x++) {',
+        '    if (' + resultsVar + '[x][0]) {',
         '      summary.push(".");',
         '    } else {',
         '      summary.push("F");',
         '      fails++;',
         '      report.push("");',
-        '      report.push("FAIL: " + ' + resultsVar + '[i][2]);',
-        '      report.push(' + resultsVar + '[i][1]);',
+        '      report.push("FAIL: " + ' + resultsVar + '[x][2]);',
+        '      report.push(' + resultsVar + '[x][1]);',
         '    }',
         '  }',
         '  report.unshift(summary.join(""));',
@@ -87,9 +86,6 @@ Blockly.JavaScript['unittest_main'].defineAssert_ = function(block) {
         '  function equals(a, b) {',
         '    if (a === b) {',
         '      return true;',
-        '    } else if ((typeof a == "number") && (typeof b == "number") &&',
-        '        (a.toPrecision(15) == b.toPrecision(15))) {',
-        '      return true;',
         '    } else if (a instanceof Array && b instanceof Array) {',
         '      if (a.length != b.length) {',
         '        return false;',
@@ -115,8 +111,7 @@ Blockly.JavaScript['unittest_main'].defineAssert_ = function(block) {
 
 Blockly.JavaScript['unittest_assertequals'] = function(block) {
   // Asserts that a value equals another value.
-  var message = Blockly.JavaScript.valueToCode(block, 'MESSAGE',
-      Blockly.JavaScript.ORDER_NONE) || '';
+  var message = Blockly.JavaScript.quote_(block.getFieldValue('MESSAGE'));
   var actual = Blockly.JavaScript.valueToCode(block, 'ACTUAL',
       Blockly.JavaScript.ORDER_COMMA) || 'null';
   var expected = Blockly.JavaScript.valueToCode(block, 'EXPECTED',
@@ -127,8 +122,7 @@ Blockly.JavaScript['unittest_assertequals'] = function(block) {
 
 Blockly.JavaScript['unittest_assertvalue'] = function(block) {
   // Asserts that a value is true, false, or null.
-  var message = Blockly.JavaScript.valueToCode(block, 'MESSAGE',
-      Blockly.JavaScript.ORDER_NONE) || '';
+  var message = Blockly.JavaScript.quote_(block.getFieldValue('MESSAGE'));
   var actual = Blockly.JavaScript.valueToCode(block, 'ACTUAL',
       Blockly.JavaScript.ORDER_COMMA) || 'null';
   var expected = block.getFieldValue('EXPECTED');
@@ -147,8 +141,7 @@ Blockly.JavaScript['unittest_fail'] = function(block) {
   // Always assert an error.
   var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
-  var message = Blockly.JavaScript.valueToCode(block, 'MESSAGE',
-      Blockly.JavaScript.ORDER_NONE) || '';
+  var message = Blockly.JavaScript.quote_(block.getFieldValue('MESSAGE'));
   var functionName = Blockly.JavaScript.provideFunction_(
       'unittest_fail',
       [ 'function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ +
@@ -160,22 +153,4 @@ Blockly.JavaScript['unittest_fail'] = function(block) {
         '  ' + resultsVar + '.push([false, "Fail.", message]);',
         '}']);
   return functionName + '(' + message + ');\n';
-};
-
-Blockly.JavaScript['unittest_adjustindex'] = function(block) {
-  var index = Blockly.JavaScript.valueToCode(block, 'INDEX',
-      Blockly.JavaScript.ORDER_ADDITION) || '0';
-  // Adjust index if using one-based indexing.
-  if (Blockly.JavaScript.ONE_BASED_INDEXING) {
-    if (Blockly.isNumber(index)) {
-      // If the index is a naked number, adjust it right now.
-      return [parseFloat(index) + 1, Blockly.JavaScript.ORDER_ATOMIC];
-    } else {
-      // If the index is dynamic, adjust it in code.
-      index = index + ' + 1';
-    }
-  } else if (Blockly.isNumber(index)) {
-    return [index, Blockly.JavaScript.ORDER_ATOMIC];
-  }
-  return [index, Blockly.JavaScript.ORDER_ADDITION];
 };

@@ -1,100 +1,114 @@
 /**
- * @license
- * Visual Blocks Editor
- *
- * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Created by Dinesh Liyanage on 9/11/2016.
  */
 
-/**
- * @fileoverview Variable blocks for Blockly.
- * @author fraser@google.com (Neil Fraser)
- */
 'use strict';
 
-goog.provide('Blockly.Blocks.variables');
+goog.provide('Blockly.lisa.variables');
+goog.require('Blockly.lisa');
 
-goog.require('Blockly.Blocks');
+var tooltip_variable = 'Variable';
+var tooltip_param = 'Parameter that has been passed';
+
 
 
 /**
- * Common HSV hue for all blocks in this category.
+ * Variable block definition
+ * @type {{init: Blockly.Blocks.variable.init}}
  */
-Blockly.Blocks.variables.HUE = 330;
+Blockly.Blocks['variable'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("myVariable"), "varName")
+            .appendField("variable of type")
+            .appendField(new Blockly.FieldDropdown([["int", "int"], ["flot", "flot"], ["double", "double"]]), "variableType")
+            .appendField("initialized to");
+        this.appendValueInput("initValue")
+            .setCheck("Number");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, ['variable']);
+        this.setNextStatement(true, ['variable']);
+        this.setColour(290);
+        this.setTooltip(tooltip_variable);
+        this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+    }
+};
 
-Blockly.Blocks['variables_get'] = {
-  /**
-   * Block for variable getter.
-   * @this Blockly.Block
-   */
+/**
+ * Parameter block definition
+ * @type {{init: Blockly.Blocks.parameter.init}}
+ */
+Blockly.Blocks['parameter'] = {
   init: function() {
-    this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
-    this.setColour(Blockly.Blocks.variables.HUE);
     this.appendDummyInput()
-        .appendField(new Blockly.FieldVariable(
-        Blockly.Msg.VARIABLES_DEFAULT_NAME), 'VAR');
-    this.setOutput(true);
-    this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
-    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_GET_CREATE_SET;
-  },
-  contextMenuType_: 'variables_set',
-  /**
-   * Add menu option to create getter/setter block for this setter/getter.
-   * @param {!Array} options List of menu options to add to.
-   * @this Blockly.Block
-   */
-  customContextMenu: function(options) {
-    var option = {enabled: true};
-    var name = this.getFieldValue('VAR');
-    option.text = this.contextMenuMsg_.replace('%1', name);
-    var xmlField = goog.dom.createDom('field', null, name);
-    xmlField.setAttribute('name', 'VAR');
-    var xmlBlock = goog.dom.createDom('block', null, xmlField);
-    xmlBlock.setAttribute('type', this.contextMenuType_);
-    option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
-    options.push(option);
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["string", "string"], ["real", "real"]]), "NAME")
+        .appendField("parameter as")
+        .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter-name");
+    this.setPreviousStatement(true, "parameter");
+    this.setNextStatement(true, "parameter");
+    this.setColour(230);
+    this.setTooltip(tooltip_param);
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
   }
 };
 
-Blockly.Blocks['variables_set'] = {
-  /**
-   * Block for variable setter.
-   * @this Blockly.Block
-   */
+Blockly.Blocks['boolean_input'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+        this.setOutput(true, "Number");
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+    }
+};
+
+Blockly.Blocks['boolean_input'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+        this.setOutput(true, "Number");
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
+
+/**
+ * Object variable block definition
+ * @type {{init: Blockly.Blocks.objectVariable.init}}
+ */
+
+
+Blockly.Blocks['object-variable'] = {
   init: function() {
-    this.jsonInit({
-      "message0": Blockly.Msg.VARIABLES_SET,
-      "args0": [
-        {
-          "type": "field_variable",
-          "name": "VAR",
-          "variable": Blockly.Msg.VARIABLES_DEFAULT_NAME
-        },
-        {
-          "type": "input_value",
-          "name": "VALUE"
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": Blockly.Blocks.variables.HUE,
-      "tooltip": Blockly.Msg.VARIABLES_SET_TOOLTIP,
-      "helpUrl": Blockly.Msg.VARIABLES_SET_HELPURL
-    });
-    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
-  },
-  contextMenuType_: 'variables_get',
-  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("myVariable"), "object_name")
+        .appendField("variable of object")
+        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+  }
+};
+
+/**
+ * Pointer  block definition
+ * @type {{init: Blockly.Blocks.objectVariable.init}}
+ */
+
+Blockly.Blocks['object-pointer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("myVariable"), "pointer_name")
+        .appendField("pointer of object")
+        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+    this.setPreviousStatement(true, ["object-pointer", "variable", "object-variable","variable-container"]);
+    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+  }
 };
