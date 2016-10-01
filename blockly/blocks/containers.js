@@ -21,15 +21,40 @@ Blockly.Blocks['class-container'] = {
     init: function() {
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
-            .appendField("class")
-            .appendField(new Blockly.FieldTextInput("sampleClass"), "class_name");
-        this.appendStatementInput("class_body")
-            .setCheck(["variable-container", "method-container", "class-container"])
+            .appendField('class')
+            .appendField(new Blockly.FieldTextInput('Parent'), 'class_name');
+        this.appendStatementInput('class_body')
+            .setCheck(['variable-container', 'method-container', 'class-container'])
             .setAlign(Blockly.ALIGN_CENTRE);
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setColour(240);
+        this.setTooltip(tooltip_class_container);
+        this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+    }
+};
+
+/**
+ * This is the definition for the class container block
+ */
+Blockly.Blocks['child-class-container'] = {
+    init: function() {
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_CENTRE)
+            .appendField('class')
+            .appendField(new Blockly.FieldTextInput('Child'), 'class_name');
+        this.appendStatementInput('class_body')
+            .setCheck(['variable-container', 'method-container', 'class-container'])
+            .setAlign(Blockly.ALIGN_CENTRE);
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_CENTRE);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setColour(100);
         this.setTooltip(tooltip_class_container);
         this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
     }
@@ -41,7 +66,7 @@ Blockly.Blocks['class-container'] = {
 Blockly.Blocks['variable-container'] = {
     init: function() {
         this.appendStatementInput('variables')
-            .setCheck("variable")
+            .setCheck('variable')
             .appendField(new Blockly.FieldDropdown([['private', 'private'], ['public', 'public'], ['protected', 'protected'], ['default', 'default']]), 'access-modifier');
         this.setInputsInline(false);
         this.setPreviousStatement(true, ['class-container', 'variable-container', 'method-container']);
@@ -58,11 +83,12 @@ Blockly.Blocks['variable-container'] = {
 Blockly.Blocks['method-container'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["public", "public"], ["protected", "protected"], ["private", "private"]]), "access-modifier");
-    this.appendStatementInput("inputs")
-        .setCheck("method");
+        .appendField(new Blockly.FieldDropdown([['public', 'public'], ['protected', 'protected'], ['private', 'private']]), 'access-modifier');
+    this.appendStatementInput('inputs')
+        .setCheck(['method', 'constructor'])
+        .setAlign(Blockly.ALIGN_CENTRE);
     this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ["method-container", "constructor-container", "variable-container"]);
+    this.setNextStatement(true, ['method-container', 'constructor', 'variable-container']);
     this.setColour(65);
     this.setTooltip(tooltip_method_container);
     this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');

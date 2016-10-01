@@ -8,8 +8,6 @@
 /*goog.provide('Blockly.lisa.variables');
 goog.require('Blockly.lisa');*/
 
-// @Todo : Please move to 'method' & 'constructor' code generation stubs to different files as they are not relevant here
-
 /**
  * Code generation stub for variable block
  * @param block
@@ -20,9 +18,10 @@ Blockly.lisa['variable'] = function(block) {
     var text_varname = block.getFieldValue('varName');
     var value_initvalue = Blockly.lisa.valueToCode(block, 'initValue', Blockly.lisa.ORDER_ATOMIC);
     // TODO: Assemble lisa into code variable.
-    var code = dropdown_variabletype + ' ' +text_varname + ' = 0;\n';
+    var code = '\t' + dropdown_variabletype + ' ' +text_varname + '= 0;\n';
     return code;
 };
+
 
 /**
  * Code generation stub for parameter block
@@ -36,46 +35,29 @@ Blockly.lisa['parameter'] = function(block) {
   var code = dropdown_name + ' ' + text_parameter_name + '$$'; //adding $$ to use it as a delimiter
   return code;
 };
-
-
 /**
- * Code generation stub for method block
- * @method block
+ * Code generation stub for object variable block
+ * @param block
  * @returns {string}
  */
-Blockly.lisa['method'] = function(block) {
-  var dropdown_name = block.getFieldValue('NAME');
-  var text_methodName = block.getFieldValue('MethodA');
-  var branch = Blockly.lisa.statementToCode(block, 'NAME')
-  // TODO: Assemble JavaScript into code variable
-    var params = branch.split('$$');
-    console.log(params.length);
-    console.log(params);
-    if(params.length > 2) {
-        for(var i = 0; i < params.length - 3; i++) {
-            params[i] = params[i] + ', ';
-        }
-        branch = params.join();
 
-    } else {
-        branch = params.join();
-    }
-    // removing the starting indentation and last comma
-    branch = branch.substring(2, branch.lastIndexOf(','));
-  var code = dropdown_name+' '+ text_methodName + '('+branch+ ') {}\n';
+Blockly.lisa['object-variable'] = function(block) {
+  var text_object_name = block.getFieldValue('object_name');
+  var text_class_name = block.getFieldValue('class_name');
+  // TODO: Assemble JavaScript into code variable.
+  var code = text_class_name+' '+text_object_name+';\n';
   return code;
 };
-
-
 /**
- * Code generation stub for constructor block
- * @constructor block
+ * Code generation stub for pointer variable block
+ * @param block
  * @returns {string}
  */
-Blockly.lisa['constructor'] = function(block) {
-  var text_constructor_name = block.getFieldValue('constructor-name');
-  var statements_name = Blockly.lisa.statementToCode(block, 'NAME');
+
+Blockly.lisa['object-pointer'] = function(block) {
+  var text_pointer_name = block.getFieldValue('pointer_name');
+  var class_name = block.getFieldValue('class_name');
   // TODO: Assemble JavaScript into code variable.
-   var code = 'void'+' '+text_constructor_name + ' (' +statements_name + ' ){}\n';
+  var code = class_name+' '+'*'+text_pointer_name+';\n';
   return code;
 };

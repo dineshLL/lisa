@@ -2,8 +2,6 @@
  * Created by Dinesh Liyanage on 9/11/2016.
  */
 
-// @Todo : Please move the 'method' & 'constructor' definitions to separate files as they are not relevant
-
 'use strict';
 
 goog.provide('Blockly.lisa.variables');
@@ -11,8 +9,8 @@ goog.require('Blockly.lisa');
 
 var tooltip_variable = 'Variable';
 var tooltip_param = 'Parameter that has been passed';
-var tooltip_method = 'Method';
-var tooltip_constructor = 'Constructor for the class';
+
+
 
 /**
  * Variable block definition
@@ -54,40 +52,15 @@ Blockly.Blocks['parameter'] = {
   }
 };
 
-/**
- * Method block definition
- * @type {{init: Blockly.Blocks.method.init}}
- */
-Blockly.Blocks['method'] = {
-  init: function() {
-    this.appendStatementInput("NAME")
-        .setCheck("parameter")
-        .appendField(new Blockly.FieldDropdown([["void", "void"], ["int", "int"], ["String", "String"], ["float", "float"], ["double", "double"], ["char", "char"]]), "NAME")
-        .appendField(new Blockly.FieldTextInput("MethodA"), "MethodA");
-    this.setPreviousStatement(true, "method");
-    this.setNextStatement(true, "method");
-    this.setColour(120);
-    this.setTooltip(tooltip_method);
-    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
-  }
-};
-
-/**
- * Constructor block definition
- * @type {{init: Blockly.Blocks.constructor.init}}
- */
-Blockly.Blocks['constructor'] = {
-  init: function() {
-    this.appendStatementInput("NAME")
-        .setCheck("parameter")
-        .appendField("void")
-        .appendField(new Blockly.FieldTextInput("_constructor"), "constructor-name");
-    this.setPreviousStatement(true, ["variable-container", "method-container"]);
-    this.setNextStatement(true, ["variable-container", "method-container"]);
-    this.setColour(330);
-    this.setTooltip(tooltip_constructor);
-    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
-  }
+Blockly.Blocks['boolean_input'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+        this.setOutput(true, "Number");
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+    }
 };
 
 Blockly.Blocks['boolean_input'] = {
@@ -99,4 +72,43 @@ Blockly.Blocks['boolean_input'] = {
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
+};
+
+/**
+ * Object variable block definition
+ * @type {{init: Blockly.Blocks.objectVariable.init}}
+ */
+
+
+Blockly.Blocks['object-variable'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("myVariable"), "object_name")
+        .appendField("variable of object")
+        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+  }
+};
+
+/**
+ * Pointer  block definition
+ * @type {{init: Blockly.Blocks.objectVariable.init}}
+ */
+
+Blockly.Blocks['object-pointer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("myVariable"), "pointer_name")
+        .appendField("pointer of object")
+        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+    this.setPreviousStatement(true, ["object-pointer", "variable", "object-variable","variable-container"]);
+    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+  }
 };
