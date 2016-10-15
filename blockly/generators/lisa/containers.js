@@ -23,6 +23,13 @@ Blockly.lisa['class-container'] = function(block) {
     var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
     //res = res.replace('$$PARENT_CLASS_NAME$$', text_class_name);
 
+
+    var myAry = [text_class_name];
+    $.cookie('ClassNames', JSON.stringify(myAry));
+    var storedAry = JSON.parse($.cookie('ClassNames'));
+
+    //console.log(storedAry[0]);
+
     return res;
 };
 

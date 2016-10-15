@@ -82,10 +82,12 @@ Blockly.Blocks['boolean_input'] = {
 
 Blockly.Blocks['object-variable'] = {
   init: function() {
+      var storedAry = JSON.parse($.cookie('ClassNames'));
+      
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput("myVariable"), "object_name")
         .appendField("variable of object")
-        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+        .appendField(new Blockly.FieldTextInput(storedAry[0]), "class_name");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
     this.setColour(260);
@@ -101,10 +103,12 @@ Blockly.Blocks['object-variable'] = {
 
 Blockly.Blocks['object-pointer'] = {
   init: function() {
+    var storedAry = JSON.parse($.cookie('ClassNames'));
+    
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput("myVariable"), "pointer_name")
         .appendField("pointer of object")
-        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+        .appendField(new Blockly.FieldTextInput(storedAry[0]), "class_name");
     this.setPreviousStatement(true, ["object-pointer", "variable", "object-variable","variable-container"]);
     this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
     this.setColour(20);
