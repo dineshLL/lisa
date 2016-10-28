@@ -1,10 +1,11 @@
 /**
  * Created by Dinesh Liyanage on 9/10/2016.
  */
-'use strict';
+// 'use strict';
 
 goog.provide('Blockly.lisa.containers');
 goog.require('Blockly.lisa');
+goog.require('Blockly.lisa.validator');
 
 
 /**
@@ -13,7 +14,7 @@ goog.require('Blockly.lisa');
  * @returns {string}
  */
 Blockly.lisa['class-container'] = function(block) {
-
+    Blockly.lisa.validator.init(block.workspace);
     var text_class_name = block.getFieldValue('class_name');
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
 
@@ -22,7 +23,8 @@ Blockly.lisa['class-container'] = function(block) {
 
     var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
     //res = res.replace('$$PARENT_CLASS_NAME$$', text_class_name);
-
+    //console.log(this.workspace);
+    Blockly.lisa.validator.refresh();
     return res;
 };
 
@@ -54,7 +56,6 @@ Blockly.lisa['variable-container'] = function(block) {
     var dropdown_accessmodifire = block.getFieldValue('access-modifier');
     var statements_variables = Blockly.lisa.statementToCode(block, 'variables');
     var code = dropdown_accessmodifire +':\n' + statements_variables;
-
     return code;
 };
 

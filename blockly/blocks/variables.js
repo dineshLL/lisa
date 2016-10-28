@@ -41,7 +41,7 @@ Blockly.Blocks['variable'] = {
 Blockly.Blocks['parameter'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["string", "string"], ["real", "real"]]), "NAME")
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["double", "double"], ["char", "char"], ["char[]", "char[]"], ["real", "real"]]), "NAME")
         .appendField("parameter as")
         .appendField(new Blockly.FieldTextInput("parameter-name"), "parameter-name");
     this.setPreviousStatement(true, "parameter");
@@ -83,9 +83,10 @@ Blockly.Blocks['boolean_input'] = {
 Blockly.Blocks['object-variable'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput("myVariable"), "object_name")
-        .appendField("variable of object")
-        .appendField(new Blockly.FieldTextInput("className"), "class_name");
+        .appendField("instance of")
+        .appendField(new Blockly.FieldDropdown([["", ""]]), "object_name")
+        .appendField("as")
+        .appendField(new Blockly.FieldTextInput("variable"), "class_name");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
     this.setColour(260);

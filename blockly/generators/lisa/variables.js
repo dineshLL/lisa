@@ -5,8 +5,8 @@
 'use strict';
 
 // Why below providers have commented?
-/*goog.provide('Blockly.lisa.variables');
-goog.require('Blockly.lisa');*/
+goog.provide('Blockly.lisa.vars');
+goog.require('Blockly.lisa');
 
 /**
  * Code generation stub for variable block
@@ -45,7 +45,7 @@ Blockly.lisa['object-variable'] = function(block) {
   var text_object_name = block.getFieldValue('object_name');
   var text_class_name = block.getFieldValue('class_name');
   // TODO: Assemble JavaScript into code variable.
-  var code = text_class_name+' '+text_object_name+';\n';
+  var code = text_object_name+' '+text_class_name+';\n';
   return code;
 };
 /**

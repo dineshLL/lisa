@@ -10,9 +10,23 @@
  * @returns {string}
  */
 Blockly.lisa['constructor'] = function(block) {
-    var text_constructor_name = block.getFieldValue('constructor-name');
-    var statements_name = Blockly.lisa.statementToCode(block, 'NAME');
+    var branchParams = Blockly.lisa.statementToCode(block, 'PARAMS');
     // TODO: Assemble JavaScript into code variable.
-    var code = 'void $$CONSTRUCTOR_NAME$$(' +statements_name + ') {}\n';
+    var params = branchParams.split('$$');
+    var space = block.workspace;
+    if(params.length > 2) {
+        for(var i = 0; i < params.length - 3; i++) {
+            params[i] = params[i] + ', ';
+        }
+        branchParams = params.join();
+
+    } else {
+        branchParams = params.join();
+    }
+// removing the starting indentation and last comma
+    branchParams = branchParams.substring(2, branchParams.lastIndexOf(','));
+
+
+    var code = '$$CONSTRUCTOR_NAME$$(' +branchParams+ ') {}\n';
     return code;
 };
