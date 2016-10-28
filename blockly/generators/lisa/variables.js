@@ -41,7 +41,7 @@ Blockly.lisa['parameter'] = function(block) {
  * @returns {string}
  */
 
-Blockly.lisa['object-variable'] = function(block) {
+Blockly.lisa['class-instance-variable'] = function(block) {
   var text_object_name = block.getFieldValue('object_name');
   var text_class_name = block.getFieldValue('class_name');
   // TODO: Assemble JavaScript into code variable.

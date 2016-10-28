@@ -80,7 +80,7 @@ Blockly.Blocks['boolean_input'] = {
  */
 
 
-Blockly.Blocks['object-variable'] = {
+Blockly.Blocks['class-instance-variable'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("instance of")
