@@ -84,9 +84,9 @@ Blockly.Blocks['class-instance-variable'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("instance of")
-        .appendField(new Blockly.FieldDropdown([["", ""]]), "object_name")
+        .appendField(new Blockly.FieldDropdown([["", ""]]), "class_name")
         .appendField("as")
-        .appendField(new Blockly.FieldTextInput("variable"), "class_name");
+        .appendField(new Blockly.FieldTextInput("variable"), "variable_name");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
     this.setColour(260);

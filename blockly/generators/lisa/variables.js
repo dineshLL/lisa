@@ -42,10 +42,10 @@ Blockly.lisa['parameter'] = function(block) {
  */
 
 Blockly.lisa['class-instance-variable'] = function(block) {
-  var text_object_name = block.getFieldValue('object_name');
   var text_class_name = block.getFieldValue('class_name');
+  var text_var_name = block.getFieldValue('variable_name');
   // TODO: Assemble JavaScript into code variable.
-  var code = text_object_name+' '+text_class_name+';\n';
+  var code = text_class_name+' '+text_var_name+';\n';
   return code;
 };
 /**
