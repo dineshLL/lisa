@@ -15,9 +15,9 @@ var tooltip_constructor = 'Constructor for the class';
  */
 Blockly.Blocks['constructor'] = {
     init: function() {
-        this.appendStatementInput("NAME")
+        this.appendStatementInput("PARAMS")
             .setCheck("parameter")
-            .appendField(new Blockly.FieldTextInput("_constructor"), "constructor-name");
+            .appendField("constructor");
         this.setPreviousStatement(true, ["variable-container", "method-container"]);
         this.setNextStatement(true, ["variable-container", "method-container"]);
         this.setColour(330);

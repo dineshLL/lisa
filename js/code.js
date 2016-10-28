@@ -39,6 +39,7 @@ function discard() {
  * Insert terminal into page.
  * https://github.com/jcubic/jquery.terminal
  */
+/*
 jQuery(function($, undefined) {
     $('#terminal').terminal(function(command, term) {
         if (command !== '') {
@@ -54,6 +55,7 @@ jQuery(function($, undefined) {
         width: 0,
         prompt: 'cake> '});
 });
+*/
 
 /**
  * Save current codes into a *.c file.
