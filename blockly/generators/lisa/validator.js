@@ -4,6 +4,7 @@
 goog.provide('Blockly.lisa.validator');
 
 var workspace;
+var colors = ['red', 'green', 'yellow'];
 
 Blockly.lisa.validator.init = function(pWorkspace) {
     if(!workspace) {
@@ -25,9 +26,13 @@ Blockly.lisa.validator.refresh = function () {
     }
 
     if(classDropDowns) {
-        classDropDowns[0].inputList[0].fieldRow[1].menuGenerator_ = [];
+        for(var z in classDropDowns) {
+            classDropDowns[z].inputList[0].fieldRow[1].menuGenerator_ = [];
+        }
         for(var i in classNameList) {
-            classDropDowns[0].inputList[0].fieldRow[1].menuGenerator_.push([classNameList[i], classNameList[i]]);
+            for(var x in classDropDowns) {
+                classDropDowns[x].inputList[0].fieldRow[1].menuGenerator_.push([classNameList[i], classNameList[i]]);
+            }
         }
 
     }
