@@ -47,7 +47,7 @@ Blockly.Blocks['child-class-container'] = {
             .appendField('class')
             .appendField(new Blockly.FieldTextInput('Child'), 'class_name');
         this.appendStatementInput('class_body')
-            .setCheck(['variable-container', 'method-container', 'class-container'])
+            .setCheck(['variable-container', 'method-container'])
             .setAlign(Blockly.ALIGN_CENTRE);
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE);
