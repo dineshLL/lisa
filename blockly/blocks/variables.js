@@ -26,8 +26,8 @@ Blockly.Blocks['variable'] = {
         this.appendValueInput("initValue")
             .setCheck("Number");
         this.setInputsInline(true);
-        this.setPreviousStatement(true, ['variable']);
-        this.setNextStatement(true, ['variable']);
+        this.setPreviousStatement(true, ['variable','class-instance-variable','object-pointer']);
+        this.setNextStatement(true, ['variable','class-instance-variable','object-pointer']);
         this.setColour(290);
         this.setTooltip(tooltip_variable);
         this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
@@ -87,8 +87,8 @@ Blockly.Blocks['class-instance-variable'] = {
         .appendField(new Blockly.FieldDropdown([["", ""]]), "class_name")
         .appendField("as")
         .appendField(new Blockly.FieldTextInput("variable"), "variable_name");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setPreviousStatement(true, ['class-instance-variable','object-pointer','variable']);
+    this.setNextStatement(true, ['class-instance-variable','object-pointer','variable']);
     this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
@@ -106,8 +106,8 @@ Blockly.Blocks['object-pointer'] = {
         .appendField(new Blockly.FieldTextInput("myVariable"), "pointer_name")
         .appendField("pointer of object")
         .appendField(new Blockly.FieldTextInput("className"), "class_name");
-    this.setPreviousStatement(true, ["object-pointer", "variable", "object-variable","variable-container"]);
-    this.setNextStatement(true, ["variable", "object-variable","object-pointer"]);
+    this.setPreviousStatement(true, ['object-pointer','class-instance-variable','variable']);
+    this.setNextStatement(true, ['object-pointer','class-instance-variable','variable']);
     this.setColour(20);
     this.setTooltip('');
     this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');

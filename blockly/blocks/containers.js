@@ -28,8 +28,8 @@ Blockly.Blocks['class-container'] = {
             .setAlign(Blockly.ALIGN_CENTRE);
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
+        this.setPreviousStatement(true, ['class-container']);
+        this.setNextStatement(true, ['class-container','child-class-container']);
         this.setInputsInline(true);
         this.setColour(240);
         this.setTooltip(tooltip_class_container);
@@ -52,7 +52,7 @@ Blockly.Blocks['child-class-container'] = {
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE);
         this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
+        this.setNextStatement(true, ['child-class-container']);
         this.setInputsInline(true);
         this.setColour(100);
         this.setTooltip(tooltip_class_container);
@@ -66,11 +66,11 @@ Blockly.Blocks['child-class-container'] = {
 Blockly.Blocks['variable-container'] = {
     init: function() {
         this.appendStatementInput('variables')
-            .setCheck('variable')
+            .setCheck(['variable','class-instance-variable','object-pointer'])
             .appendField(new Blockly.FieldDropdown([['private', 'private'], ['public', 'public'], ['protected', 'protected'], ['default', 'default']]), 'access-modifier');
         this.setInputsInline(false);
-        this.setPreviousStatement(true, ['class-container', 'variable-container', 'method-container']);
-        this.setNextStatement(true, ['class-container', 'variable-container', 'method-container']);
+        this.setPreviousStatement(true, ['variable-container', 'method-container']);
+        this.setNextStatement(true, ['variable-container', 'method-container']);
         this.setColour(20);
         this.setTooltip(tooltip_variable_container);
         this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
@@ -87,7 +87,7 @@ Blockly.Blocks['method-container'] = {
     this.appendStatementInput('inputs')
         .setCheck(['method', 'constructor'])
         .setAlign(Blockly.ALIGN_CENTRE);
-    this.setPreviousStatement(true, null);
+    this.setPreviousStatement(true, ['method-container','variable-container',]);
     this.setNextStatement(true, ['method-container', 'constructor', 'variable-container']);
     this.setColour(65);
     this.setTooltip(tooltip_method_container);
