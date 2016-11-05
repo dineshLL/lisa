@@ -37,13 +37,13 @@
 <header id="header" style="border: 0px solid black">
     <div class="container"style="border: 0px solid black">
         <!--<div class="row" style="border: 1px solid black">-->
-            <!--<div class="col-sm-12 overflow" style="border: 1px solid black">-->
-                <!--<div class="social-icons pull-right">-->
-                    <!--<ul class="nav nav-pills">-->
-                        <!--<br>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--<div class="col-sm-12 overflow" style="border: 1px solid black">-->
+        <!--<div class="social-icons pull-right">-->
+        <!--<ul class="nav nav-pills">-->
+        <!--<br>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
     </div>
     <div class="navbar navbar-inverse" role="banner">
@@ -79,8 +79,8 @@
         <div class="row">
             <div class="main-slider">
                 <div class="slide-text">
-                    <h1>Let's learn Object Oriented Programming</h1>
-                    <p>Lisa is waiting for you to teach. You will learn the OOP concepts with C++ language. Play with these colorful blocks and you will understand what is OOP. Let's get started!</p>
+                    <h1>Let's learn Structured Programming</h1>
+                    <p>Lisa is waiting for you to teach. Let your imagination out. Play with these colorful bricks and do something. Code will be automatically generated for you. Let's get started!</p>
                     <a  id="playground" class="btn btn-common">PLAYGROUD</a>
                 </div>
                 <img src="images/home/slider/hill.png" class="slider-hill" alt="slider image">
@@ -102,7 +102,7 @@
             <div class="row" >
                 <div class="action">
                     <div class="col-sm-12" id="scrollingPosition">
-                        <h1 class="title">OOP CONCEPTS</h1>
+                        <h1 class="title">Everything is structured!</h1>
                         <p>Be Creative</p>
                     </div>
                 </div>
@@ -117,33 +117,137 @@
             </div>
             <!--<div id="blocklyToolBoxDiv" class="col-md-1" style="height: auto; float: left;margin:0px;border:1px solid purple">-->
             <xml id="toolbox">
-                <category name="Containers">
-                    <category name="Class Container">
-                        <block type="class-container"></block>
-                        <block type="child-class-container"></block>
-                    </category>
-                    <category name="Varialble Container">
-                        <block type="variable-container"></block>
-                    </category>
-                    <category name="Method Container">
-                        <block type="method-container"></block>
-                    </category>
-                </category>
-                <category name="Methods">
-                    <category name="Method">
-                        <block type="method"></block>
-                    </category>
-                    <category name="Constructor Method">
-                        <block type="constructor"></block>
-                    </category>
-                </category>
                 <category name="Variables">
-                    <block type="variable"></block>
-                    <block type="class-instance-variable"></block>
-                     <block type="object-pointer"></block>
+                    <category name="Variable">
+                        <block type="variables_declare"></block>
+                        <block type="variables_get"></block>
+                        <block type="variables_set"></block>
+                    </category>
+                    <category name="Pointer">
+                        <block type="variables_pointer_declare"></block>
+                        <block type="variables_pointer_get"></block>
+                        <block type="variables_pointer_set">
+                            <value name="VAR">
+                                <block type="variables_pointer_get">
+                                </block>
+                            </value></block>
+                        <block type="variables_pointer_&"></block>
+                        <block type="variables_pointer_*"></block>
+                    </category>
+                    <category name="Array">
+                        <block type="variables_array_declare"></block>
+                        <block type="variables_array_get"></block>
+                        <block type="variables_array_set"></block>
+                    </category>
                 </category>
-                <category name="Parameters">
-                    <block type="parameter"></block>
+                <category name="Arithmetics">
+                    <block type="math_number"></block>
+                    <block type="math_arithmetic"></block>
+                    <block type="math_modulo"></block>
+                </category>
+                <category name="Loops">
+                    <block type="controls_whileUntil"></block>
+                    <block type="controls_doWhile"></block>
+                    <block type="controls_for"></block>
+                    <block type="controls_flow_statements"></block>
+                </category>
+                <category name="Logic">
+                    <block type="controls_if"></block>
+                    <block type="controls_switch"></block>
+                    <block type="controls_switch_break"></block>
+                    <block type="logic_compare"></block>
+                    <block type="logic_operation"></block>
+                    <block type="logic_negate"></block>
+                    <block type="logic_boolean"></block>
+                    <block type="logic_null"></block>
+                    <block type="logic_ternary"></block>
+                </category>
+                <category name="Functions" custom="PROCEDURE">
+                    <block type="procedures_defnoreturn"></block>
+                    <block type="procedures_defreturn"></block>
+                    <block type="procedures_ifreturn"></block>
+                </category>
+                </category>
+                <category name="Structure" custom="STRUCTURE">
+                    <block type="structure_define"></block>
+                    <block type="structure_declare"></block>
+                </category>
+                <category name="Library">
+                    <category name="Stdio">
+                        <block type="library_stdio_printf"></block>
+                        <block type="library_stdio_text"></block>
+                        <block type='library_stdio_newLine'></block>
+                        <block type="library_stdio_scanf"></block>
+                    </category>
+                    <category name="Stdlib">
+                        <block type="library_stdlib_convert"></block>
+                        <block type="library_stdlib_rand">
+                            <value name="VAR">
+                                <block type="library_stdlib_rand_scope">
+                                    <value name="A">
+                                        <block type="library_stdlib_number_forRandScope1"></block>
+                                    </value>
+                                    <value name="B">
+                                        <block type="library_stdlib_number_forRandScope100"></block>
+                                    </value>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="library_stdlib_malloc">
+                            <value name="VAR">
+                                <block type="library_stdlib_arithmetic_forMalloc">
+                                    <value name="A">
+                                        <block type="library_stdlib_sizeof_forMalloc"></block>
+                                    </value>
+                                    <value name="B">
+                                        <block type="library_stdlib_number_forMalloc"></block>
+                                    </value>
+                                </block>
+                            </value>
+                        </block>
+                        <block type="library_stdlib_arithmetic_forMalloc">
+                            <value name="A">
+                                <block type="library_stdlib_sizeof_forMalloc"></block>
+                            </value>
+                            <value name="B">
+                                <block type="library_stdlib_number_forMalloc"></block>
+                            </value>
+                        </block>
+                        <block type="library_stdlib_free"></block>
+                        <block type="library_stdlib_exit"></block>
+                    </category>
+                    <category name="String">
+                        <block type="library_string_strlen"></block>
+                        <block type="library_string_strcat"></block>
+                        <block type="library_string_strcpy"></block>
+                        <block type="library_string_strcmp"></block>
+                    </category>
+                    <category name="Math">
+                        <block type="library_math_abs"></block>
+                        <block type="library_math_trig"></block>
+                        <block type="library_math_logs"></block>
+                        <block type="library_math_pow"></block>
+                        <block type="library_math_exp"></block>
+                        <block type="library_math_sqrt"></block>
+                        <block type="library_math_round"></block>
+                        <block type="library_math_numcheck"></block>
+                        <block type="library_math_numcompare"></block>
+                    </category>
+                    <category name="Time">
+                        <block type="library_time_current"></block>
+                        <block type="library_time_requiredTime"></block>
+                    </category>
+                </category>
+                <category name="Others">
+                    <block type='comment'>
+                        <value name="VAR0">
+                            <block type="library_stdio_text"></block>
+                        </value>
+                    </block>
+                    <block type="library_stdio_text"></block>
+                    <block type="math_number"></block>
+                    <block type="define_declare"></block>
+                    <block type="define_get"></block>
                 </category>
             </xml>
             <!--</div>-->
@@ -156,7 +260,7 @@
                         <h3 class="panel-title"><strong>Code</strong></h3>
                     </div>
                     <pre style="height: 420px;margin: 0px; border:2px solid #CCCCCC" class="panel-body">
-                        <code id="code4Cplusplus" class="cpp"></code>
+                        <code id="code4C" class="cpp"></code>
                     </pre>
                 </div>
             </div>
@@ -182,30 +286,38 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="single-blog blog-details two-column">
                             <!--<div class="post-thumb">-->
-                                <!--<div class="post-overlay">-->
-                                    <!--<span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>-->
-                                <!--</div>-->
+                            <!--<div class="post-overlay">-->
+                            <!--<span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>-->
+                            <!--</div>-->
                             <!--</div>-->
                             <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="#">Class</a></h2>
+                                <h2
+                                        class="post-title bold"><a href="#">
+                                    Main method</a></h2>
                                 <h3 class="post-author"><a href="#"> Details</a></h3>
-                                <p>A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.
-                                    Below is an example of a basic Java class definition:</p>
-                                    <pre><code class="cpp">
-            class Sample {
-                        public static void main(String[] args) {
-                            String sampleText = "Hello world!";
-                                  System.out.println(sampleText);
-                        }
-                } </code></pre>
+                                <p>Structured programming is a style that adopted to programes in early decades. It's easy to learn. Everything will be sequencial. This style of programming is using functions. Functions are some piece of code which can interpret a behaviour. In C programming, we write a main method, which is the entry point to start a program. Below we have demostrated a function which accepts two user inputs and print the result in the screen.</p>
+                                <pre><code class="cpp">
+                                    #include <stdio.h>
+                                    int main()
+                                    {
+                                        int firstNumber, secondNumber, sumOfTwoNumbers;
 
-                                <p>
-                                    The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java's built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.
+                                        printf("Enter two integers: ");
 
-                                    Classes are a fundamental part of object-oriented programming. They allow variables and methods to be isolated to specific objects instead of being accessible by all parts of the program. This encapsulation of data protects each class from changes in other parts of the program. By using classes, developers can create structured programs with source code that can be easily modified.
+                                        // numbers entered by user will store into those variables respectively
+                                        scanf("%d %d", &firstNumber, &secondNumber);
 
-                                    NOTE: While classes are foundational in object-oriented programming, they serve as blueprints, rather than the building blocks of each program. This is because classes must be instantiated as objects in order to be used within a program. Constructors are typically used to create objects from classes, while destructors are used to free up resources used by objects that are no longer needed.
-                                </p>
+                                        // calculate the sum
+                                        sumOfTwoNumbers = firstNumber + secondNumber;
+
+                                        // display the sum
+                                        printf("%d + %d = %d", firstNumber, secondNumber, sumOfTwoNumbers);
+
+                                        return 0;
+                                    }
+                                </code></pre>
+
+
                             </div>
                         </div>
                     </div>
@@ -314,37 +426,37 @@
 </footer>
 <script>
     function sendMail() {
-    var link = "mailto:email_address@gmail.com"
-             + "&subject=" + escape(escape(document.getElementById('email').value)+" "+document.getElementById('name').value)
-             + "&body=" + escape(document.getElementById('message').value);
+        var link = "mailto:email_address@gmail.com"
+                + "&subject=" + escape(escape(document.getElementById('email').value)+" "+document.getElementById('name').value)
+                + "&body=" + escape(document.getElementById('message').value);
 
-    window.location.href = link;
+        window.location.href = link;
 
-    setTimeout(function(){ location.reload(); }, 3000);
-    
-}
+        setTimeout(function(){ location.reload(); }, 3000);
+
+    }
 </script>
 <script>
-    
+
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     /*var onresize = function(e) {
-        // Compute the absolute coordinates and dimensions of blocklyArea.
-        var element = blocklyArea;
-        var x = 0;
-        var y = 0;
-        do {
-            x += element.offsetLeft;
-            y += element.offsetTop;
-            element = element.offsetParent;
-        } while (element);
-        // Position blocklyDiv over blocklyArea.
-        blocklyDiv.style.left = x + 'px';
-        blocklyDiv.style.top = y + 'px';
-        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-    };
-    window.addEventListener('resize', onresize, false);*/
+     // Compute the absolute coordinates and dimensions of blocklyArea.
+     var element = blocklyArea;
+     var x = 0;
+     var y = 0;
+     do {
+     x += element.offsetLeft;
+     y += element.offsetTop;
+     element = element.offsetParent;
+     } while (element);
+     // Position blocklyDiv over blocklyArea.
+     blocklyDiv.style.left = x + 'px';
+     blocklyDiv.style.top = y + 'px';
+     blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+     blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+     };
+     window.addEventListener('resize', onresize, false);*/
     /*onresize();*/
     /*Blockly.svgResize(workspace);*/
 
@@ -352,17 +464,10 @@
 <!--/footer-->
 
 <script type="text/javascript" src="blockly/blockly_uncompressed.js"></script>
+<script type="text/javascript" src="blockly/blocks_compressed.js"></script>
 <script type="text/javascript" src="blockly/msg/js/en.js"></script>
-<script type="text/javascript" src="blockly/generators/lisa.js"></script>
-<script type="text/javascript" src="blockly/generators/lisa/validator.js"></script>
-<script type="text/javascript" src="blockly/generators/lisa/containers.js"></script>
-<script type="text/javascript" src="blockly/generators/lisa/methods.js"></script>
-<script type="text/javascript" src="blockly/generators/lisa/constructors.js"></script>
-<script type="text/javascript" src="blockly/generators/lisa/variables.js"></script>
-<script type="text/javascript" src="blockly/blocks/containers.js"></script>
-<script type="text/javascript" src="blockly/blocks/constructors.js"></script>
-<script type="text/javascript" src="blockly/blocks/methods.js"></script>
-<script type="text/javascript" src="blockly/blocks/variables.js"></script>
+<script type="text/javascript" src="blockly/generators/cake.js"></script>
+<script type="text/javascript" src="cake_compressed.js"></script>
 <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/code.js"></script>
