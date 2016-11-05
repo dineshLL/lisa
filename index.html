@@ -156,7 +156,7 @@
                         <h3 class="panel-title"><strong>Code</strong></h3>
                     </div>
                     <pre style="height: 420px;margin: 0px; border:2px solid #CCCCCC" class="panel-body">
-                        <code id="code" class="cpp"></code>
+                        <code id="code4Cplusplus" class="cpp"></code>
                     </pre>
                 </div>
             </div>
@@ -192,12 +192,12 @@
                                 <p>A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.
                                     Below is an example of a basic Java class definition:</p>
                                     <pre><code class="cpp">
-                                        class Sample {
-                                            public static void main(String[] args) {
-                                                String sampleText = "Hello world!";
-                                                System.out.println(sampleText);
-                                            }
-                                        } </code></pre>
+            class Sample {
+                        public static void main(String[] args) {
+                            String sampleText = "Hello world!";
+                                  System.out.println(sampleText);
+                        }
+                } </code></pre>
 
                                 <p>
                                     The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java's built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.
@@ -287,18 +287,18 @@
             <div class="col-md-4 col-sm-12">
                 <div class="contact-form bottom">
                     <h2>Send a message</h2>
-                    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                    <form id="main-contact-form" name="contact-form">
                         <div class="form-group">
-                            <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                            <input type="text" name="name" id="name" class="form-control" required="required" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
+                            <input type="email" name="email" id="email" class="form-control" required="required" placeholder="Email Id">
                         </div>
                         <div class="form-group">
                             <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                            <input type="submit" name="submit" class="btn btn-submit" value="Submit" onclick="return sendMail() ">
                         </div>
                     </form>
                 </div>
@@ -313,6 +313,19 @@
     </div>
 </footer>
 <script>
+    function sendMail() {
+    var link = "mailto:email_address@gmail.com"
+             + "&subject=" + escape(escape(document.getElementById('email').value)+" "+document.getElementById('name').value)
+             + "&body=" + escape(document.getElementById('message').value);
+
+    window.location.href = link;
+
+    setTimeout(function(){ location.reload(); }, 3000);
+    
+}
+</script>
+<script>
+    
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     /*var onresize = function(e) {
