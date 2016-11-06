@@ -81,7 +81,8 @@
                 <div class="slide-text">
                     <h1>Let's learn Object Oriented Programming</h1>
                     <p>Lisa is waiting for you to teach. You will learn the OOP concepts with C++ language. Play with these colorful blocks and you will understand what is OOP. Let's get started!</p>
-                    <a  id="playground" class="btn btn-common">PLAYGROUD</a>
+                    <a  id="playground" class="btn btn-common">C++ PLAYGROUD</a>
+                    <a href="Lisa4C.html"  class="btn btn-common">C PLAYGROUD</a>
                 </div>
                 <img src="images/home/slider/hill.png" class="slider-hill" alt="slider image">
                 <img src="images/home/slider/house.png" class="slider-house" alt="slider image">
@@ -186,25 +187,40 @@
                                     <!--<span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>-->
                                 <!--</div>-->
                             <!--</div>-->
-                            <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="#">Class</a></h2>
-                                <h3 class="post-author"><a href="#"> Details</a></h3>
-                                <p>A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.
-                                    Below is an example of a basic Java class definition:</p>
-                                    <pre><code class="cpp">
-            class Sample {
-                        public static void main(String[] args) {
-                            String sampleText = "Hello world!";
-                                  System.out.println(sampleText);
-                        }
-                } </code></pre>
+                            <div class="post-content overflow" id="main_content">
+                                <h2 class="post-title bold"><a id="def_title">Class</a></h2>
+                             
+                                <p id="first_para">A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.
+                                    <br/>Below is an example of a basic C++ class definition:</p>
+                                <pre><code class="cpp" id="def_code">
+    #include <strong><</strong>iostream<strong>></strong>
+ 
+    using namespace std;
 
-                                <p>
-                                    The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java's built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.
 
-                                    Classes are a fundamental part of object-oriented programming. They allow variables and methods to be isolated to specific objects instead of being accessible by all parts of the program. This encapsulation of data protects each class from changes in other parts of the program. By using classes, developers can create structured programs with source code that can be easily modified.
+    class Shape  {
+         public:
+             void setWidth(int w) {
+                 width = w;
+             }
+		
+            void setHeight(int h) {
+                 height = h;
+            }
+		
+     protected:
+         int width;
+         int height;
+    };
+    <br/>
+</code></pre>
 
-                                    NOTE: While classes are foundational in object-oriented programming, they serve as blueprints, rather than the building blocks of each program. This is because classes must be instantiated as objects in order to be used within a program. Constructors are typically used to create objects from classes, while destructors are used to free up resources used by objects that are no longer needed.
+                                <p id="second_para">
+                                    The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java's built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.<br/>
+
+                                    Classes are a fundamental part of object-oriented programming. They allow variables and methods to be isolated to specific objects instead of being accessible by all parts of the program. This encapsulation of data protects each class from changes in other parts of the program. By using classes, developers can create structured programs with source code that can be easily modified.<br/>
+
+                                    <b>NOTE:</b> While classes are foundational in object-oriented programming, they serve as blueprints, rather than the building blocks of each program. This is because classes must be instantiated as objects in order to be used within a program. Constructors are typically used to create objects from classes, while destructors are used to free up resources used by objects that are no longer needed.
                                 </p>
                             </div>
                         </div>
@@ -214,13 +230,13 @@
             <div class="col-md-3 col-sm-5">
                 <div class="sidebar blog-sidebar">
                     <div class="sidebar-item  recent">
-                        <h3><strong>Other Featuers</strong></h3>
+                        <h3><strong>Other Conecpts</strong></h3>
                         <div class="media">
                             <div class="pull-left">
                                 <a href="#"><img class="img-responsive" width="52px" height="52px" src="blockly/images/ic_dashboard_black_24dp_2x.png" alt=""></a>
                             </div>
                             <div class="media-body">
-                                <h4><a href="#"><strong>Inheritance</strong></a></h4>
+                                <h4><a  onclick="ChangeContent(0)"><strong>Class</strong></a></h4>
                                 <p></p>
                             </div>
                         </div>
@@ -229,7 +245,7 @@
                                 <a href="#"><img class="img-responsive" width="52px" height="52px" src="blockly/images/ic_dashboard_black_24dp_2x.png" alt=""></a>
                             </div>
                             <div class="media-body">
-                                <h4><a href="#"><strong>Polymorphism</strong></a></h4>
+                                <h4><a  onclick="ChangeContent(1)"><strong>Inheritance</strong></a></h4>
                                 <p></p>
                             </div>
                         </div>
@@ -238,7 +254,16 @@
                                 <a href="#"><img class="img-responsive" width="52px" height="52px" src="blockly/images/ic_dashboard_black_24dp_2x.png" alt=""></a>
                             </div>
                             <div class="media-body">
-                                <h4><a href="#"><strong>Abstraction</strong></a></h4>
+                                <h4><a onclick="ChangeContent(2)"><strong>Polymorphism</strong></a></h4>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#"><img class="img-responsive" width="52px" height="52px" src="blockly/images/ic_dashboard_black_24dp_2x.png" alt=""></a>
+                            </div>
+                            <div class="media-body">
+                                <h4><a onclick="ChangeContent(3)"><strong>Abstraction</strong></a></h4>
                                 <p></p>
                             </div>
                         </div>
@@ -313,6 +338,42 @@
     </div>
 </footer>
 <script>
+    function ChangeContent(id){
+
+         var title = ['Class','Inheritance','polymorphism','Abstraction'];
+         var paraOne = ['A class is used in object-oriented programming to describe one or more objects. It serves as a template for creating, or instantiating, specific objects within a program. While each object is created from a single class, one class can be used to instantiate multiple objects.Several programming languages support classes, including Java, C++, Objective C, and PHP 5 and later. While the syntax of a class definition varies between programming languages, classes serve the same purpose in each language. All classes may contain variable definitions and methods, or subroutines that can be run by the corresponding object.<br>Below is an example of a basic C++ class definition:'
+         
+         ,'One of the most important concepts in object-oriented programming is that of inheritance. Inheritance allows us to define a class in terms of another class, which makes it easier to create and maintain an application. This also provides an opportunity to reuse the code functionality and fast implementation time.<br/>When creating a class, instead of writing completely new data members and member functions, the programmer can designate that the new class should inherit the members of an existing class. This existing class is called the <b>base</b> class, and the new class is referred to as the <b>derived</b> class.<br/>The idea of inheritance implements the <b>is a</b> relationship. For example, mammal IS-A animal, dog IS-A mammal hence dog IS-A animal as well and so on.'
+         
+         ,'The word <b>polymorphism</b> means having many forms. Typically, polymorphism occurs when there is a hierarchy of classes and they are related by inheritance.<br>C++ polymorphism means that a call to a member function will cause a different function to be executed depending on the type of object that invokes the function.<br>Consider the following example where a base class has been derived by other two classes:'
+         
+         ,'Data abstraction refers to, providing only essential information to the outside world and hiding their background details, i.e., to represent the needed information in program without presenting the details.\n\n Data abstraction is a programming (and design) technique that relies on the separation of interface and implementation.\n Let\'s take one real life example of a TV, which you can turn on and off, change the channel, adjust the volume, and add external components such as speakers, VCRs, and DVD players, BUT you do not know its internal details, that is, you do not know how it receives signals over the air or through a cable, how it translates them, and finally displays them on the screen.\n Thus, we can say a television clearly separates its internal implementation from its external interface and you can play with its interfaces like the power button, channel changer, and volume control without having zero knowledge of its internals.\n\n Now, if we talk in terms of C++ Programming, C++ classes provides great level of <b>data abstraction</b>. They provide sufficient public methods to the outside world to play with the functionality of the object and to manipulate object data, i.e., state without actually knowing how class has been implemented internally.\n For example, your program can make a call to the sort() function without knowing what algorithm the function actually uses to sort the given values. In fact, the underlying implementation of the sorting functionality could change between releases of the library, and as long as the interface stays the same, your function call will still work.'
+         ];
+         var paraTwo = [' The above class, named Sample, includes a single method named main. Within main, the variable sampleText is defined as "Hello world!" The main method invokes the System class from Java\'s built-in core library, which contains the out.println method. This method is used to print the sample text to the text output window.<br/>Classes are a fundamental part of object-oriented programming. They allow variables and methods to be isolated to specific objects instead of being accessible by all parts of the program. This encapsulation of data protects each class from changes in other parts of the program. By using classes, developers can create structured programs with source code that can be easily modified.<br/><b>NOTE:</b> While classes are foundational in object-oriented programming, they serve as blueprints, rather than the building blocks of each program. This is because classes must be instantiated as objects in order to be used within a program. Constructors are typically used to create objects from classes, while destructors are used to free up resources used by objects that are no longer needed.'
+         
+         ,'When deriving a class from a base class, the base class may be inherited through <b>public</b>, <b>protected</b> or <b>private</b> inheritance. The type of inheritance is specified by the access-specifier as explained above.<br>We hardly use <b>protected</b> or <b>private</b> inheritance, but <b>public</b> inheritance is commonly used. While using different type of inheritance, following rules are applied:<br><br><b>Public Inheritance:</b> When deriving a class from a public base class, public members of the base class become public members of the derived class and protected members of the base class become protected members of the derived class. A base class\'s private members are never accessible directly from a derived class, but can be accessed through calls to the public and protected members of the base class.<br><br><b>Protected Inheritance:</b> When deriving from a protected base class, public and protected members of the base class become protected members of the derived class.<br><br><b>Private Inheritance:</b> When deriving from a private base class, public and protected members of the base class become private members of the derived class.'
+         
+         ,'A virtual function is a function in a base class that is declared using the keyword <b>virtual</b>. Defining in a base class a virtual function, with another version in a derived class, signals to the compiler that we don\'t want static linkage for this function.<br><br>What we do want is the selection of the function to be called at any given point in the program to be based on the kind of object for which it is called. This sort of operation is referred to as dynamic linkage, or late binding.'
+         
+         ,'Above class adds numbers together, and returns the sum. The public members addNum and getTotal are the interfaces to the outside world and a user needs to know them to use the class. The private member total is something that the user doesn\'t need to know about, but is needed for the class to operate properly.'
+         ];
+
+         var code = ['#include <strong><</strong>iostream<strong>></strong>\n\nusing namespace std;\n\n class Shape  {\n \t public:\n \t void setWidth(int w) { \n\t\t width = w;\n\t }\n\t void setHeight(int h) {\n\t\t height = h;\n\t }\n\n\t  protected:\n\t\t int width;\n\t\t int height; \n };'
+         
+         ,'#include <strong><</strong>iostream<strong>></strong> \n\n using namespace std; \n\n class Shape  {\n \t public:\n \t void setWidth(int w) { \n \t\t width = w;\n\t } \n\n \t void setHeight(int h) {\n \t\t height = h;\n \t }\n\n \t protected:\n \t\t int width; \n\t\t int height;\n};\n\n\n class Rectangle: public Shape { \n \t public:\n \t int getArea() { \n \t\t return (width * height); \n\t } \n};\n\n'
+         
+         ,'#include <strong><</strong>iostream<strong>></strong>\n\n using namespace std;\n\n class Shape {\n\t protected: \n\t\t int width, height; \n\t public: \n\t Shape( int a = 0, int b = 0) {\n\t\t width = a;\n\t\t height = b; \n\t } \n\t virtual int area() {\n\t\t cout << "Parent class area :"<strong><<</strong>endl; \n\t\t return 0; \n\t } \n }; \n\n class Rectangle: public Shape {\n\t public:\n\t Rectangle( int a = 0, int b = 0):Shape(a, b) { }\n\t int area () { \n\t\t out << "Rectangle class area :" <strong><<</strong>endl;\n\t\t return (width * height); \n\t }\n};\n\n class Triangle: public Shape{\n\t public:\n\t Triangle( int a = 0, int b = 0):Shape(a, b) { }\n\t\t int area () { \n\t\t\t cout <strong><<</strong> "Triangle class area :" <strong><<</strong>endl;\n\t\t\t return (width * height / 2); \n\t\t }\n };\n\n// Main function for the program \n int main( ) {\n\t Shape *shape;\n\t Rectangle rec(10,7);\n\t Triangle  tri(10,5);\n\n\t // store the address of Rectangle\n\tshape = &rec;\n\n\t// call rectangle area.\n\tshape->area();\n\n\t// store the address of Triangle\n\tshape = &tri;\n\n\t // call triangle area.\n\t shape->area();\n\t return 0; \n }'
+         
+         ,'#include <strong><</strong>iostream<strong>></strong>\n\nusing namespace std;\n\nclass Adder {\n\t public:\n\t// constructor\n\tAdder(int i = 0) {\n\t\ttotal = i;\n\t}\n\n\t// interface to outside world\n\tvoid addNum(int number) {\n\ttotal += number;\n\t}\n\n\t// interface to outside world\n\t\tint getTotal() {\n\t\t\treturn total;\n\t };\n\n\tprivate:\n\t\t// hidden data from outside world\n\t\tint total;\n};\n\nint main( ) {\n\tAdder a;\n\ta.addNum(10);\n\ta.addNum(20);\n\ta.addNum(30);\n\tcout <strong><<</strong> "Total " <strong><<</strong> a.getTotal() <strong><<</strong>endl;\n\treturn 0;\n}'
+         ];
+
+           
+            document.getElementById('def_title').innerHTML   = title[id];
+            document.getElementById('first_para').innerHTML  = paraOne[id];
+            document.getElementById('def_code').innerHTML    = code[id];
+            document.getElementById('second_para').innerHTML = paraTwo[id];
+
+    }
     function sendMail() {
     var link = "mailto:email_address@gmail.com"
              + "&subject=" + escape(escape(document.getElementById('email').value)+" "+document.getElementById('name').value)
