@@ -14,6 +14,20 @@
 <script type="text/javascript" src="../../generators/javascript/colour.js"></script>
 <script type="text/javascript" src="../../generators/javascript/variables.js"></script>
 <script type="text/javascript" src="../../generators/javascript/procedures.js"></script>
+
+
+<script type="text/javascript" src="../../generators/lisa.js"></script>
+<script type="text/javascript" src="../../generators/lisa/validator.js"></script>
+<script type="text/javascript" src="../../generators/lisa/containers.js"></script>
+<script type="text/javascript" src="../../generators/lisa/methods.js"></script>
+<script type="text/javascript" src="../../generators/lisa/constructors.js"></script>
+<script type="text/javascript" src="../../generators/lisa/variables.js"></script>
+<script type="text/javascript" src="../../blocks/containers.js"></script>
+<script type="text/javascript" src="../../blocks/constructors.js"></script>
+<script type="text/javascript" src="../../blocks/methods.js"></script>
+<script type="text/javascript" src="../../blocks/variables.js"></script>
+
+
 <script type="text/javascript" src="../../generators/python.js"></script>
 <script type="text/javascript" src="unittest_python.js"></script>
 <script type="text/javascript" src="../../generators/python/logic.js"></script>
@@ -115,6 +129,7 @@ function toXml() {
 }
 
 function toJavaScript() {
+
   var code = '\'use strict\';\n\n'
   code += Blockly.JavaScript.workspaceToCode();
   setOutput(code);
@@ -165,6 +180,37 @@ h1 {
   <div id="svg"></div>
 
   <xml id="toolbox" style="display: none">
+              <category name="Containers">
+                    <category name="Class Container">
+                        <block type="class-container"></block>
+                        <block type="child-class-container"></block>
+                    </category>
+                    <category name="Varialble Container">
+                        <block type="variable-container"></block>
+                    </category>
+                    <category name="Method Container">
+                        <block type="method-container"></block>
+                    </category>
+                </category>
+                <category name="Methods">
+                    <category name="Method">
+                        <block type="method"></block>
+                    </category>
+                    <category name="Constructor Method">
+                        <block type="constructor"></block>
+                    </category>
+                </category>
+                <category name="Variables">
+                    <block type="variable"></block>
+                    <block type="class-instance-variable"></block>
+                     <block type="object-pointer"></block>
+                </category>
+                <category name="Parameters">
+                    <block type="parameter"></block>
+                </category>
+
+
+                
     <category name="Unit test">
       <block type="unittest_main"></block>
       <block type="unittest_assertequals"></block>
