@@ -22,7 +22,6 @@
  * @fileoverview Helper functions for generating JavaScript for blocks.
  * @author fraser@google.com (Neil Fraser)
  */
-'use strict';
 
 goog.provide('Blockly.JavaScript');
 
@@ -162,7 +161,6 @@ Blockly.JavaScript.scrubNakedValue = function(line) {
  * @private
  */
 Blockly.JavaScript.quote_ = function(string) {
-  // TODO: This is a quick hack.  Replace with goog.string.quote
   string = string.replace(/\\/g, '\\\\')
                  .replace(/\n/g, '\\\n')
                  .replace(/'/g, '\\\'');

@@ -1,7 +1,6 @@
 /**
  * Created by Dinesh Liyanage on 9/10/2016.
  */
-// 'use strict';
 
 goog.provide('Blockly.lisa.containers');
 goog.require('Blockly.lisa');
@@ -18,12 +17,10 @@ Blockly.lisa['class-container'] = function(block) {
     var text_class_name = block.getFieldValue('class_name');
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
 
-    // TODO: Assemble JavaScript into code variable.
     var code = 'class '+ text_class_name +' {\n'+ statements_class_body +'}';
 
     var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
-    //res = res.replace('$$PARENT_CLASS_NAME$$', text_class_name);
-    //console.log(this.workspace);
+
     Blockly.lisa.validator.refresh();
     return res;
 };
@@ -38,7 +35,6 @@ Blockly.lisa['child-class-container'] = function(block) {
     var text_class_name = block.getFieldValue('class_name');
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
 
-    // TODO: Assemble JavaScript into code variable.
     var parentClassName = this.parentBlock_.getFieldValue('class_name');
     var code = '\n\nclass '+ text_class_name +': '+ parentClassName +' {\n'+ statements_class_body +'}';
     var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);

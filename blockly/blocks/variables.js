@@ -2,7 +2,6 @@
  * Created by Dinesh Liyanage on 9/11/2016.
  */
 
-'use strict';
 
 goog.provide('Blockly.lisa.variables');
 goog.require('Blockly.lisa');

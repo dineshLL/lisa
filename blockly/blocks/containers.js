@@ -5,7 +5,6 @@
  * @modified : 09/14/2016
  */
 
-'use strict';
 
 goog.provide('Blockly.Blocks.test');
 goog.require('Blockly.Blocks');
