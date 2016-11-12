@@ -2,7 +2,6 @@
  * Created by JNiroshan on 9/19/2016.
  */
 
-'use strict';
 
 /**
  * Code generation stub for constructor block
@@ -11,9 +10,7 @@
  */
 Blockly.lisa['constructor'] = function(block) {
     var branchParams = Blockly.lisa.statementToCode(block, 'PARAMS');
-    // TODO: Assemble JavaScript into code variable.
     var params = branchParams.split('$$');
-    var space = block.workspace;
     if(params.length > 2) {
         for(var i = 0; i < params.length - 3; i++) {
             params[i] = params[i] + ', ';

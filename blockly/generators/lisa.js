@@ -23,7 +23,6 @@
  * @fileoverview Helper functions for generating C++ for blocks. Modified from the standard Blockly lisa generator. 
  * @author fraser@google.com (Neil Fraser), dininno@mit.edu (Ethan DiNinno)
  */
-'use strict';
 
 goog.provide('Blockly.lisa');
 goog.require('Blockly.Generator');
@@ -52,7 +51,7 @@ Blockly.lisa.C_GLOBAL_VARS = [];
 Blockly.lisa.addReservedWords(
   ',alignas,alignof,and,and_eq,asm,auto,bitand,bitor,bool,break,case,catch,char,char16_t,char32_t,class,compl,const,constexpr,const_cast,continue,decltype,default,delete,do,double,dynamic_cast,else,enum,explicit,export,extern,false,float,for,friend,goto,if,inline,int,long,long double,long long,mutable,namespace,new,noexcept,not,not_eq,nullptr,operator,or,or_eq,private,protected,public,register,reinterpret_cast,return,short,signed,sizeof,static,static_assert,static_cast,struct,switch,template,this,thread_local,throw,true,try,typedef,typeid,typename,union,unsigned,using,virtual,void,volatile,wchar_t,while,xor,xor_eq,posix,'
   // http://en.cppreference.com/w/cpp/keyword
-  + 'game,api,PI,PI2,PI3,PI4,DEG2RAD,RAD2DEG,ZRMS,ZR2D,ZR3D,ALLIANCE' //TODO: add ZR #defines to list
+  + 'game,api,PI,PI2,PI3,PI4,DEG2RAD,RAD2DEG,ZRMS,ZR2D,ZR3D,ALLIANCE'
 );
 
 /**
@@ -206,7 +205,6 @@ Blockly.lisa.scrubNakedValue = function(line) {
  * @private
  */
 Blockly.lisa.quote_ = function(string) {
-  // TODO: This is a quick hack.  Replace with goog.string.quote
 
     string = string.replace(/\\/g, '\\\\')
                     .replace(/'/g, '\\\'')
