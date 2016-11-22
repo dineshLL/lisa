@@ -6,7 +6,7 @@
 goog.provide('Blockly.lisa.methods');
 goog.require('Blockly.lisa');
 
-var tooltip_method = 'Method';
+var tooltip_method = 'Method,Main';
 
 /**
  * Method block definition
@@ -21,6 +21,19 @@ Blockly.Blocks['method'] = {
         this.setPreviousStatement(true, "method");
         this.setNextStatement(true, "method");
         this.setColour(120);
+        this.setTooltip(tooltip_method);
+        this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
+    }
+};
+Blockly.Blocks['main'] = {
+    init: function() {
+        this.appendStatementInput("NAME")
+            .setCheck(['method', 'constructor', 'variable'])
+            .appendField(new Blockly.FieldDropdown([["int", "int"]]), "RETURN_TYPE")
+            .appendField(new Blockly.FieldTextInput("main"), "METHOD_NAME");
+        this.setPreviousStatement(true, "method");
+        this.setNextStatement(true, "method");
+        this.setColour(210);
         this.setTooltip(tooltip_method);
         this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
     }
