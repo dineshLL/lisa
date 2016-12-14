@@ -36,7 +36,7 @@ Blockly.lisa['child-class-container'] = function(block) {
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
 
     var parentClassName = this.parentBlock_.getFieldValue('class_name');
-    var code = '\n\nclass '+ text_class_name +': public '+ parentClassName +' {\n'+ statements_class_body +'}';
+    var code = '\n\nclass '+ text_class_name +': '+ parentClassName +' {\n'+ statements_class_body +'}';
     var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
     return res;
 };
