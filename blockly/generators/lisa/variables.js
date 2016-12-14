@@ -15,7 +15,12 @@ goog.require('Blockly.lisa');
 Blockly.lisa['variable'] = function(block) {
     var dropdown_variabletype = block.getFieldValue('variableType');
     var text_varname = block.getFieldValue('varName');
-    var code = '\t' + dropdown_variabletype + ' ' +text_varname + '= 0;\n';
+    var argument0 = Blockly.lisa.valueToCode(block, 'init_value',
+            Blockly.lisa.ORDER_ASSIGNMENT) || '0';
+    if (Blockly.Blocks.checkLegalName(Blockly.Msg.VARIABLES_ILLEGALNAME, text_varname) == -1){
+        this.initVar();
+    }
+    var code = '\t' + dropdown_variabletype + ' ' +text_varname + ' = ' + argument0 +  ';\n';
     return code;
 };
 
@@ -54,4 +59,12 @@ Blockly.lisa['object-pointer'] = function(block) {
   var class_name = block.getFieldValue('class_name');
   var code = class_name+' '+'*'+text_pointer_name+';\n';
   return code;
+};
+
+Blockly.lisa['init_value'] = function(block) {
+    var text_init_value = block.getFieldValue('init_value');
+    // TODO: Assemble JavaScript into code variable.
+    var code = text_init_value;
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.lisa.ORDER_ASSIGNMENT];
 };

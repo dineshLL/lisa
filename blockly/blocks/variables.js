@@ -113,3 +113,14 @@ Blockly.Blocks['object-pointer'] = {
     this.setHelpUrl('https://github.com/dineshLL/lisa/wiki');
   }
 };
+
+Blockly.Blocks['init_value'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("1"), "init_value");
+        this.setInputsInline(false);
+        this.setOutput(true, null);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
