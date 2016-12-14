@@ -50,7 +50,7 @@ Blockly.lisa['class-instance-variable'] = function(block) {
  */
 
 Blockly.lisa['object-pointer'] = function(block) {
-  var text_pointer_name = block.getFieldValue('pointer_name');
+  var text_pointer_name = block.getFieldValue('variable_name');
   var class_name = block.getFieldValue('class_name');
   var code = class_name+' '+'*'+text_pointer_name+';\n';
   return code;
