@@ -18,7 +18,7 @@ Blockly.lisa.validator.refresh = function () {
     });
 
     var classDropDowns = workspace.getAllBlocks().filter(function (block) {
-        return block.type == 'class-instance-variable';
+        return block.type == 'class-instance-variable' || block.type == 'object-pointer';
     })
     var classNameList = [];
     for(var i in classes) {
