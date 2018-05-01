@@ -17,7 +17,7 @@ Blockly.lisa['class-container'] = function(block) {
     var text_class_name = block.getFieldValue('class_name');
     var statements_class_body = Blockly.lisa.statementToCode(block, 'class_body');
 
-    var code = 'class test '+ text_class_name +' {\n'+ statements_class_body +'}';
+    var code = '#incluse mbed.h \n\nclass ahmed '+ text_class_name +' {\n'+ statements_class_body +'}';
 
     var res = code.replace('$$CONSTRUCTOR_NAME$$', text_class_name);
 
